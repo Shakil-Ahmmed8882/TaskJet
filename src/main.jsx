@@ -9,7 +9,7 @@ import {NextUIProvider} from "@nextui-org/react";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <div className="max-w-6xl mx-auto">
+    <div className="">
     <NextUIProvider>
     <RouterProvider router={router} />
     </NextUIProvider>

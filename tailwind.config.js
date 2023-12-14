@@ -11,6 +11,9 @@ export default {
 
   ],
   theme: {
+    colors:{
+    primaryColor:"#F31E85"
+    },
     extend: {},
   },
   plugins: [nextui()],
