@@ -1,16 +1,27 @@
 import React from "react";
-import {Navbar, NavbarContent, NavbarItem, Link, Button, NavbarMenuToggle, NavbarMenu, NavbarMenuItem} from "@nextui-org/react";
+import {
+  Navbar,
+  NavbarContent,
+  NavbarItem,
+  Link,
+  Button,
+  NavbarMenuToggle,
+  NavbarMenu,
+  NavbarMenuItem,
+} from "@nextui-org/react";
 import { menuItems } from "./MenuItems";
 import { NavLink, useNavigate } from "react-router-dom";
+import { BsFilterRight } from "react-icons/bs";
+
 export default function TopNavbar() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-  const goTo = useNavigate()
+  const goTo = useNavigate();
 
   return (
-    <Navbar onMenuOpenChange={setIsMenuOpen}
-    maxWidth="full"
-    style={{backgroundColor:""}}
-    >
+    <Navbar
+      onMenuOpenChange={setIsMenuOpen}
+      maxWidth="full"
+      style={{ backgroundColor: "" }}>
       <NavbarContent>
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -19,12 +30,15 @@ export default function TopNavbar() {
         the icon in the left
       </NavbarContent>
 
-      <NavbarContent className="hidden sm:flex gap-4" justify="center">
-  
-      
-      </NavbarContent>
+      <NavbarContent
+        className="hidden sm:flex gap-4"
+        justify="center"></NavbarContent>
       <NavbarContent justify="end">
-      <NavLink
+        <div className="flex gap-1 items-center ">
+          Filter
+          <BsFilterRight className="text-[20px]"/>
+        </div>
+        <NavLink
           exact
           to="/login"
           activeClassName="active"
@@ -32,10 +46,13 @@ export default function TopNavbar() {
           <span>Login</span>
         </NavLink>
         <NavbarItem>
-          <Button onClick={()=> goTo('/signup')} as={Link} color="primary" variant="flat">
+          <Button
+            onClick={() => goTo("/signup")}
+            as={Link}
+            color="primary"
+            variant="flat">
             Sign Up
           </Button>
-            
         </NavbarItem>
       </NavbarContent>
 
@@ -45,12 +62,15 @@ export default function TopNavbar() {
           <NavbarMenuItem key={`${item}-${index}`}>
             <Link
               color={
-                index === 2 ? "primary" : index === menuItems.length - 1 ? "danger" : "foreground"
+                index === 2
+                  ? "primary"
+                  : index === menuItems.length - 1
+                  ? "danger"
+                  : "foreground"
               }
               className="w-full"
               href="#"
-              size="lg"
-            >
+              size="lg">
               {item}
             </Link>
           </NavbarMenuItem>
