@@ -1,0 +1,6 @@
+/* Img.module.css */
+
+.overlay {
+      background-color: #000; /* Choose your overlay color */
+      mix-blend-mode: screen; /* Choose your blend mode */
+    }

@@ -1,4 +1,4 @@
-import { BiSearch } from "react-icons/bi";
+
 import { BsSearch } from "react-icons/bs";
 
 

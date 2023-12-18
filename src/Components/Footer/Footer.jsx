@@ -2,7 +2,7 @@
 
 const Footer = () => {
       return (
-            <div>
+            <div className="h-[300px] mt-11">
                Footer   
             </div>
       );

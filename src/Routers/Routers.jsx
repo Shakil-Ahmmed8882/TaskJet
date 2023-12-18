@@ -16,6 +16,7 @@ import Setting from "../Components/Dashboard/Setting/Setting";
 import ProgressTracker from "../Components/Progress/ProgressTracker";
 import DeadlineTracker from "../Components/Dashboard/Deadline/DeadlineTracker";
 import Collaboration from "../Components/Dashboard/Collaboration/Collaboration";
+import QuickStart from "../Components/Dashboard/QuickStart/QuickStart";
 
 export const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ export const router = createBrowserRouter([
       {
         index: true,
         element: <Home></Home>,
+      },
+      {
+        path: "/quick_start",
+        element: <QuickStart></QuickStart>,
       },
       {
         path: "/tasks",

@@ -15,7 +15,7 @@ import { Avatar } from "@nextui-org/react";
 
 const DashboardRoutes = () => {
   return (
-    <div className="md:p-4  bg-[#FFFFFF] pl-[10px] md:pl-[25px]">
+    <div className="md:p-4  bg-[#FFFFFF] pl-[10px] h-full z-30 fixed md:pl-[25px]">
       <div className="w-[180px] relative hidden md:block overflow-auto hide-scrollbar   h-screen">
           <div className="fixed top-0 z-50 bg-[white] w-[180px] ">
           <Logo></Logo>
@@ -34,6 +34,12 @@ const DashboardRoutes = () => {
             <li className="flex items-center gap-2 mt-3">
               <BiHomeSmile />
               Home
+            </li>
+          </Link>
+          <Link to="/quick_start">
+            <li className="flex items-center gap-2">
+              <BiHomeSmile />
+              Quick start
             </li>
           </Link>
           <Link to="/tasks">
