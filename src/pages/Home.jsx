@@ -1,12 +1,11 @@
 import TitleDescription from "../Shared/TitleDescription";
 import Quotes from "../Components/Home/Quotes";
-import Users from "../Components/Home/Users";
 import Testimonials from "../Components/Home/Testimonials";
 
 const Home = () => {
   return (
     <div className="">
-      <div className="bg-[#b0efff10] h-[600px] w-[600px] filter blur-3xl absolute top-11 left-0 z-10"></div>
+      <div className="bg-[#ffffff10] h-[600px] w-[600px] filter blur-3xl absolute top-11 left-0 z-10"></div>
       {/* <div className="bg-[#fd8bc80c] h-[600px] w-[600px] filter blur-3xl absolute top-11 right-0 z-10"></div> */}
       <TitleDescription
         title={"Streamline your tasks "}

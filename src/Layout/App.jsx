@@ -7,14 +7,14 @@ import ProfileAndNotification from "../Components/Navbar/ProfileAndNotification"
 
 function App() {
   const location = useLocation()
-  const isHomeRoute = location.pathname == '/'
+  const isHomeRoute = location.pathname == '/dashboard'
   return (
     <div className={`flex ${isHomeRoute?"md:w-[84%]":"w-full"}`}>
       <div className="">
         <DashboardRoutes></DashboardRoutes>
       </div>
       <div className="w-full md:ml-[220px]">
-        <div className=" items-center flex md:px-2 justify-between ">
+        <div className=" items-center md:flex md:px-2 md:justify-between ">
           <div className="md:w-1/2">
             <TopSearchBar />
           </div>

@@ -17,84 +17,87 @@ import ProgressTracker from "../Components/Progress/ProgressTracker";
 import DeadlineTracker from "../Components/Dashboard/Deadline/DeadlineTracker";
 import Collaboration from "../Components/Dashboard/Collaboration/Collaboration";
 import QuickStart from "../Components/Dashboard/QuickStart/QuickStart";
+import InitialLandingPage from "../Layout/LandingPage/InitialLandingPage";
+import Banner from "../pages/Banner";
 
 export const router = createBrowserRouter([
   {
     path: "/",
+    element: <InitialLandingPage />,
+    children: [{ index: true, element: <Banner /> }],
+  },
+  {
+    path: "/dashboard",
     element: <App />,
     children: [
       {
         index: true,
-        element: <Home></Home>,
+        element: <Home />,
       },
       {
-        path: "/quick_start",
-        element: <QuickStart></QuickStart>,
+        path: "quick_start",
+        element: <QuickStart />,
       },
       {
-        path: "/tasks",
-        element: <Tasks></Tasks>,
+        path: "tasks",
+        element: <Tasks />,
       },
       {
-        path: "/notes",
-        element: <Notes></Notes>,
+        path: "notes",
+        element: <Notes />,
       },
       {
-        path: "/archive",
-        element: <Archive></Archive>,
+        path: "archive",
+        element: <Archive />,
       },
       {
-        path: "/calendar",
-        element: <Calendar></Calendar>,
+        path: "calendar",
+        element: <Calendar />,
       },
       {
-        path: "/categories",
-        element: <Categories></Categories>,
+        path: "categories",
+        element: <Categories />,
       },
       {
-        path: "/categories",
-        element: <Categories></Categories>,
+        path: "statistics",
+        element: <Statistics />,
       },
       {
-        path: "/statistics",
-        element: <Statistics></Statistics>,
+        path: "template",
+        element: <Template />,
       },
       {
-        path: "/template",
-        element: <Template></Template>,
+        path: "remainders",
+        element: <Remainder />,
       },
       {
-        path: "/remainders",
-        element: <Remainder></Remainder>,
+        path: "collaboration",
+        element: <Collaboration />,
       },
       {
-        path: "/collaboration",
-        element: <Collaboration></Collaboration>,
+        path: "deadline_tracker",
+        element: <DeadlineTracker />,
       },
       {
-        path: "/deadline_tracker",
-        element: <DeadlineTracker></DeadlineTracker>,
+        path: "progress_tracker",
+        element: <ProgressTracker />,
       },
       {
-        path: "/progress_tracker",
-        element: <ProgressTracker></ProgressTracker>,
+        path: "notifications",
+        element: <Notification />,
       },
       {
-        path: "/notifications",
-        element: <Notification></Notification>,
-      },
-      {
-        path: "/setting",
-        element: <Setting></Setting>,
+        path: "setting",
+        element: <Setting />,
       },
     ],
   },
   {
     path: "/login",
-    element: <Login></Login>,
+    element: <Login />,
   },
   {
     path: "/signup",
-    element: <Signup></Signup>,
+    element: <Signup />,
   },
 ]);

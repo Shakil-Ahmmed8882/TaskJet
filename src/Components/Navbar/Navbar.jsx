@@ -9,6 +9,8 @@ import {
   NavbarMenu,
   NavbarMenuItem,
 } from "@nextui-org/react";
+import { CiMenuFries } from "react-icons/ci";
+
 
 import { menuItems } from "./MenuItems";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -23,15 +25,15 @@ export default function TopNavbar() {
     <Navbar
       onMenuOpenChange={setIsMenuOpen}
       maxWidth=""
-      className="relative"
       style={{ backgroundColor: "" }}>
-      <NavbarContent>
-        <div className="w-9 absolute -z-10  h-9 bg-primaryColor"></div>
+      <NavbarContent className="relative flex md:hidden ">
         <NavbarMenuToggle
+        className=" h-8"
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
         />
+        <div className="w-11 left-0 absolute -z-10  h-6"><CiMenuFries className="w-full h-full"/></div>
       </NavbarContent>
-
+        
       <NavbarContent
         className="hidden sm:flex gap-4"
         justify="center"></NavbarContent>

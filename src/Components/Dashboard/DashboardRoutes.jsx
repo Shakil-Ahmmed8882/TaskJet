@@ -30,7 +30,7 @@ const DashboardRoutes = () => {
         </div>
 
         <ul className="flex flex-col gap-y-2 routes">
-          <Link to="/">
+          <Link to="/dashboard">
             <li className="flex items-center gap-2 mt-3">
               <BiHomeSmile />
               Home
