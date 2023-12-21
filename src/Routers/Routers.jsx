@@ -1,7 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../Layout/App";
 import Home from "../pages/Home";
-import Login from "../Components/Login/Login";
 import Signup from "../Components/Signup/Signup";
 import Tasks from "../Components/Dashboard/Tasks/Tasks";
 import Notes from "../Components/Dashboard/Notes/Notes";
@@ -19,6 +18,8 @@ import Collaboration from "../Components/Dashboard/Collaboration/Collaboration";
 import QuickStart from "../Components/Dashboard/QuickStart/QuickStart";
 import InitialLandingPage from "../Layout/LandingPage/InitialLandingPage";
 import Banner from "../pages/Banner";
+import Login from "../Components/Ui/Form/Login";
+import SignUp from "../Components/Ui/Form/Signup";
 
 export const router = createBrowserRouter([
   {
@@ -98,6 +99,6 @@ export const router = createBrowserRouter([
   },
   {
     path: "/signup",
-    element: <Signup />,
+    element: <SignUp />,
   },
 ]);

@@ -5,7 +5,6 @@ import {
   NavbarItem,
   Link,
   Button,
-  NavbarMenuToggle,
 } from "@nextui-org/react";
 
 import { NavLink, useNavigate } from "react-router-dom";

@@ -1,6 +1,7 @@
 import { Avatar, Badge } from "@nextui-org/react";
 import { BsBell } from "react-icons/bs";
 import TopNavbar from "./Navbar";
+import ProfileDropdown from "./ProfileDropdown";
 
 
 const ProfileAndNotification = () => {
@@ -14,12 +15,7 @@ const ProfileAndNotification = () => {
             </Badge>
 
                   </div>
-            <Avatar
-              style={{ width: "30px", height: "30px" }}
-              isBordered
-              color="danger"
-              src="https://i.pravatar.cc/150?u=a04258114e29026708c"
-            />
+       <ProfileDropdown/>
           </div>    
             </div>
       );

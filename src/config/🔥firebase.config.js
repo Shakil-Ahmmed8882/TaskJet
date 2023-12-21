@@ -6,16 +6,16 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_APIKEY,
-  authDomain: import.meta.env.VITE_AUTHDOMAIN,
-  projectId: import.meta.env.VITE_PROJECTID,
-  storageBucket: import.meta.env.VITE_STORAGEBUCKET,
-  messagingSenderId: import.meta.env.VITE_MESSAGINGSENDERID,
-  appId: import.meta.env.VITE_APPID,
+  apiKey: "AIzaSyCpyJtnkKZnP_SVR8rhjjnwO5CCbodC3x0",
+  authDomain: "tasklet-7db26.firebaseapp.com",
+  projectId: "tasklet-7db26",
+  storageBucket: "tasklet-7db26.appspot.com",
+  messagingSenderId: "942845905289",
+  appId: "1:942845905289:web:bdbec9238d3e39a1b6f958"
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+const auth = getAuth(app)
 
-export default auth;
+export default auth

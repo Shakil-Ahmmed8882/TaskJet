@@ -20,7 +20,8 @@ export default function TopNavbar() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const goTo = useNavigate();
 
-  console.log(isMenuOpen);
+  
+  
   return (
     <Navbar
       onMenuOpenChange={setIsMenuOpen}
@@ -58,7 +59,17 @@ export default function TopNavbar() {
             Sign Up
           </Button>
         </NavbarItem>
+        <NavbarItem>
+          <Button
+            onClick={() =>handleLogOut() }
+            as={Link}
+            color="primary"
+            variant="flat">
+            Sign out
+          </Button>
+        </NavbarItem>
       </NavbarContent>
+      
 
       {/* This menu are the dropdown */}
       <NavbarMenu className="bg-primaryColor w-1/2 top-0">
