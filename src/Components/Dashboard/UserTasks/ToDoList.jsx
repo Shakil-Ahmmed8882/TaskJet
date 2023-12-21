@@ -6,6 +6,9 @@ import Priority from "./Priority";
 import { BiSolidCheckCircle } from "react-icons/bi";
 import { BiCalendarCheck } from "react-icons/bi";
 import { BiCheck } from "react-icons/bi";
+import { AiFillDelete } from "react-icons/ai";
+import { AiTwotoneEdit } from "react-icons/ai";
+import SkeletonListLoader from "../../Ui/Skeleton/SkeletonListLoader";
 
 const ToDoList = () => {
   const [tasks, setTasks] = useState([]);
@@ -23,6 +26,17 @@ const ToDoList = () => {
     e.preventDefault();
     const form = new FormData(e.target);
     const task = Object.fromEntries(form);
+
+    //  Set deadline to the task with time
+    // Extract and combine date and time values for the deadline
+    const deadlineDate = form.get("deadline-date");
+    const deadlineTime = form.get("deadline-time");
+    const deadline = `${deadlineDate} ${deadlineTime}`; // Combine date and time
+
+    task.deadline = deadline; // Store deadline in the task object
+
+      console.log(deadline)
+
     task.priority = selectedPriority;
     setTasks([...tasks, task]); // Update tasks array with the new task
     e.target.reset(); // Reset the form after adding the task
@@ -71,6 +85,38 @@ const ToDoList = () => {
                     />
                   </div>
                 </div>
+                {/* Deadline starts here */}
+                <div className="flex space-x-4 mt-5">
+                <div>
+                  <label
+                    htmlFor="deadline-date"
+                    className="block font-bold text-sm text-gray-700"
+                  >
+                    Deadline Date
+                  </label>
+                  <input
+                    name="deadline-date"
+                    type="date"
+                    required
+                    className="px-2 py-3 mt-1 block w-full rounded-md shadow-sm focus:border-sky-500 focus:outline-none focus:ring-sky-500 sm:text-sm"
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="deadline-time"
+                    className="block font-bold text-sm text-gray-700"
+                  >
+                    Deadline Time
+                  </label>
+                  <input
+                    name="deadline-time"
+                    type="time"
+                    required
+                    className="px-2 py-3 mt-1 block w-full rounded-md shadow-sm focus:border-sky-500 focus:outline-none focus:ring-sky-500 sm:text-sm"
+                  />
+                </div>
+              </div>
+                {/* Deadline ends here */}
               </div>
               <div>
                 <button
@@ -85,30 +131,57 @@ const ToDoList = () => {
       </div>
       <div className=" bg-[white] flex-1 h-[1000px]">
         <ul className="p-5">
-            {/* maping the newly added task */}
-          {tasks.map((task, index) => (
-            <li
-              key={index}
-              className={` border-l-3 ${task.priority =="High"?" border-l-greenAccent bg-[white] shadow-lg my-3 rounded-lg p-2": task.priority === "Moderate" ?"border-l-[orange]": "border-l-[red]"} bg-[white] shadow-lg my-5 rounded-lg p-2`}>
-              <div className="flex items-center gap-1">
-                <h2 className="text-[16px] mb-1 font-semibold">
-                  {task.title} First task title
-                </h2>
-                <span className="text-[20px] font-bold">
-                  {task.priority === "High" ? (
-                    <BiSolidCheckCircle className={`text-greenAccent`} />
-                  ) : task.priority === "Moderate" ? (
-                    <BiCalendarCheck className="text-[orange]" />
-                  ) : (
-                    <BiCheck className="text-[red]" />
-                  )}
-                </span>
-              </div>
-              <p className="text-[#767575] ">
-                {task.description.slice(0, 100)}{" "}
-              </p>
-            </li>
-          ))}
+          {/* maping the newly added task */}
+          {tasks.length > 0 ? (
+            tasks.map((task, index) => (
+              <li
+                key={index}
+                className={` relative border-l-3 ${
+                  task.priority == "High"
+                    ? " border-l-greenAccent bg-[white] shadow-lg my-3 rounded-lg p-2"
+                    : task.priority === "Moderate"
+                    ? "border-l-[orange]"
+                    : "border-l-[red]"
+                } bg-[white] shadow-lg my-5 rounded-lg p-2`}>
+                  <div>
+                <div className="flex items-center gap-1">
+                  <h2 className="text-[16px] mb-1 font-semibold">
+                    {task.title} First task title
+                  </h2>
+                  <span className="text-[20px] font-bold">
+                    {task.priority === "High" ? (
+                      <BiSolidCheckCircle className={`text-greenAccent`} />
+                    ) : task.priority === "Moderate" ? (
+                      <BiCalendarCheck className="text-[orange]" />
+                    ) : (
+                      <BiCheck className="text-[red]" />
+                    )}
+                  </span>
+                </div>
+                <span className="bg-[#E4F4FD] p-1 text-[13px] text-accentColor rounded-lg">{task.deadline}</span>
+
+                  </div>
+                <p className="text-[#767575] mt-2 ">
+                  {task.description}{" "}
+                </p>
+                <div className="flex gap-2 absolute top-2 right-2">
+                  <AiFillDelete className=" cursor-pointer text-[#ff6c6c] text-[17px]" />
+                  <AiTwotoneEdit className=" cursor-pointer text-[17px]" />
+                </div>
+              </li>
+            ))
+          ) : (
+            <div className="w-full h-full flex flex-col  justify-center">
+              <h1 className="text-4xl mb-8">Add your To-do here..</h1>
+              
+
+              <SkeletonListLoader/>
+              <SkeletonListLoader/>
+              <SkeletonListLoader/>
+              
+
+            </div>
+          )}
         </ul>
       </div>
     </div>
