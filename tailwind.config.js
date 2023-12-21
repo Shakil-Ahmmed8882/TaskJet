@@ -14,7 +14,8 @@ export default {
     primaryColor:"#F31E85",
     accentColor:"#00BAF8",
     accentLightBg:"#E2F7FE",
-    primaryLightBg:"#FDEAF0"
+    primaryLightBg:"#FDEAF0",
+    greenAccent:"#0BA229"
     },
     extend: {},
   },

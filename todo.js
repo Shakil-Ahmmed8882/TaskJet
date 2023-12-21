@@ -8,7 +8,11 @@
  * 
  * ===== USER =====
  *  Create user  profile routes (dashboard, todo,ongoing,completed )
- * TODO: add title input description and priority
+ *  add title input description and priority
+ *  get the input value
+ * TODO: Set the deadline and get that value 
+ * TODO: Add the task in the right column with nice ui feel
+ * TODO: Show the priority in the corner with light accent hererigenious color
  * 
  * 
  * 

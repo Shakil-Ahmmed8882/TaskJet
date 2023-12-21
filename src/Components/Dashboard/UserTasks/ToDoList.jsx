@@ -1,17 +1,32 @@
+import { useState } from "react";
 import { Textarea } from "@nextui-org/react";
 import TitleDescription from "../../../Shared/TitleDescription";
-import "./user_task.css";
 import Priority from "./Priority";
-import { useState } from "react";
+
+import { BiSolidCheckCircle } from "react-icons/bi";
+import { BiCalendarCheck } from "react-icons/bi";
+import { BiCheck } from "react-icons/bi";
+
 const ToDoList = () => {
+  const [tasks, setTasks] = useState([]);
 
-  const [selectedPriority, setSelectedPriority] = useState('Set Priority'); // Default text
+  console.log(tasks);
+
+  // Priority state management
+  const [selectedPriority, setSelectedPriority] = useState("Set Priority");
+
   const handlePrioritySelect = (priority) => {
-      setSelectedPriority(priority.label); // Update selected priority text
-    };
+    setSelectedPriority(priority.label); // Update selected priority text
+  };
 
-
-
+  const handleAddTask = (e) => {
+    e.preventDefault();
+    const form = new FormData(e.target);
+    const task = Object.fromEntries(form);
+    task.priority = selectedPriority;
+    setTasks([...tasks, task]); // Update tasks array with the new task
+    e.target.reset(); // Reset the form after adding the task
+  };
 
   return (
     <div className="flex relative">
@@ -20,22 +35,21 @@ const ToDoList = () => {
           <div className="bg-[white] sticky top-2  shadow-md rounded-md p-8">
             <div className="flex items-center">
               <TitleDescription title={"To do list"} />
-          
             </div>
-           
-            <form className="space-y-6 mt-4" action="#" method="POST">
+            <form className="space-y-6 mt-4" onSubmit={handleAddTask}>
               <div>
-                  <div className="flex items-center justify-between">
-                <label
-                  htmlFor="password"
-                  className="block font-bold text-sm  text-gray-700">
-                  Title
-                </label>
-                <Priority handlePrioritySelect={handlePrioritySelect} selectedPriority={selectedPriority}/>
-
-
-                  </div>
-                <div className="mt-1  border-b-1 border-b-[#80808082]">
+                <div className="flex items-center justify-between">
+                  <label
+                    htmlFor="password"
+                    className="block font-bold text-sm text-gray-700">
+                    Title
+                  </label>
+                  <Priority
+                    handlePrioritySelect={handlePrioritySelect}
+                    selectedPriority={selectedPriority}
+                  />
+                </div>
+                <div className="mt-1 border-b-1 border-b-[#80808082]">
                   <input
                     name="title"
                     placeholder="Enter your task title"
@@ -46,18 +60,17 @@ const ToDoList = () => {
                 </div>
               </div>
               <div>
-           
                 <div className="mt-1">
                   <div className="w-full flex flex-col gap-2">
                     <Textarea
                       variant="underlined"
+                      name="description"
                       label="Description"
                       labelPlacement="outside"
                       placeholder="Enter your task description"
                     />
                   </div>
                 </div>
-
               </div>
               <div>
                 <button
@@ -70,7 +83,34 @@ const ToDoList = () => {
           </div>
         </div>
       </div>
-      <div className=" bg-primaryColor flex-1 h-[1000px]"></div>
+      <div className=" bg-[white] flex-1 h-[1000px]">
+        <ul className="p-5">
+            {/* maping the newly added task */}
+          {tasks.map((task, index) => (
+            <li
+              key={index}
+              className={` border-l-3 ${task.priority =="High"?" border-l-greenAccent bg-[white] shadow-lg my-3 rounded-lg p-2": task.priority === "Moderate" ?"border-l-[orange]": "border-l-[red]"} bg-[white] shadow-lg my-5 rounded-lg p-2`}>
+              <div className="flex items-center gap-1">
+                <h2 className="text-[16px] mb-1 font-semibold">
+                  {task.title} First task title
+                </h2>
+                <span className="text-[20px] font-bold">
+                  {task.priority === "High" ? (
+                    <BiSolidCheckCircle className={`text-greenAccent`} />
+                  ) : task.priority === "Moderate" ? (
+                    <BiCalendarCheck className="text-[orange]" />
+                  ) : (
+                    <BiCheck className="text-[red]" />
+                  )}
+                </span>
+              </div>
+              <p className="text-[#767575] ">
+                {task.description.slice(0, 100)}{" "}
+              </p>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };
