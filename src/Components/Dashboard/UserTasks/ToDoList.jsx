@@ -20,11 +20,9 @@ const ToDoList = () => {
   const { user } = UseAuth();
   // api instance
   const xiosPublic = usePublicApi();
-  const {data,isLoading,refetch} = useGetData("/tasks","all-tasks")
+  const {data,isLoading,refetch} = useGetData(`/tasks?email=${user&&user.email}`,user?.email)
 
   if(isLoading) "loding.."
-
-  console.log(data)
   
 
 const tasks  = data || []
@@ -58,7 +56,7 @@ const tasks  = data || []
     // e.target.reset(); // Reset the form after adding the task
 
     // api for storing each task
-    const response = await xiosPublic.post("task", task);
+    const response = await xiosPublic.post(`task`, task);
     const isTheTaskStored = await response.data;
 
     if (isTheTaskStored.insertedId) {
@@ -72,9 +70,11 @@ const tasks  = data || []
   // Editing modal handling here..
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [taskId, setTaskId] = useState("");
 
-  const handleModalOpen = () => {
+  const handleModalOpen = (_id) => {
     setIsModalOpen(true); // Function to set the modal as open
+    setTaskId(_id)
   };
 
   return (
@@ -202,11 +202,11 @@ const tasks  = data || []
                 <div className="flex gap-2 absolute top-2 right-2 ">
                   <AiFillDelete className=" cursor-pointer text-[#ff6c6c] text-[20px] " />
                   <AiTwotoneEdit
-                    onClick={handleModalOpen}
+                    onClick={()=> handleModalOpen(task._id)}
                     className=" cursor-pointer text-[20px]"
                   />
                   {/* when click on edit this below modal will be displayed */}
-                  <TaskModal isOpen={isModalOpen} setIsOpen={setIsModalOpen} />
+                  <TaskModal isOpen={isModalOpen} setIsOpen={setIsModalOpen} taskId={taskId}/>
                 </div>
               </li>
             ))

@@ -20,7 +20,8 @@
  * TODO: edit and updated send result to the client 
  * TODO: edit a single task
  * 
- * 
+ * ---------------- home -------------
+      * TODO: Quote slide must be relevant quote text
  * 
  * 
  */

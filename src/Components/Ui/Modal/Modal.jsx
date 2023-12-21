@@ -12,16 +12,27 @@ import { useState } from "react";
 import usePublicApi from "../../../Hooks/usePublicApi";
 import { successToast } from "../../../utils/SuccessToast";
 import { errorToast } from "../../../utils/ErrorToast";
+import { useGetData } from "../../../Hooks/useGetData";
 
-export default function TaskModal({ isOpen, setIsOpen }) {
-  //   const {isOpen, onOpen, onOpenChange} = useDisclosure();
-  const scrollBehavior = "inside";
-
+export default function TaskModal({ isOpen, setIsOpen, taskId }) {
   //   Api instance
-  const xiosPublic = usePublicApi();
 
+  const xiosPublic = usePublicApi();
   //   set up priority of the task
   const [selectedPriority, setSelectedPriority] = useState("");
+
+  const { data, isLoading, refetch } = useGetData(
+    `/task?taskId=${taskId}`,
+    taskId
+  );
+
+  if (isLoading) return "loading..";
+
+
+
+  const {_id,title,description,deadlineDate,deadlineTime,deadline,email,priority
+  } = data
+  // console.log(Object.keys(data).join(""))
 
   const handlePrioritySelect = (priority) => {
     setSelectedPriority(priority.label); // Update selected priority text
@@ -89,6 +100,7 @@ export default function TaskModal({ isOpen, setIsOpen }) {
                       <input
                         name="title"
                         placeholder="Enter your task title"
+                        defaultValue={title}
                         type="text"
                         required
                         className="px-2 py-3 mt-1 block w-full rounded-md shadow-sm focus:border-sky-500 focus:outline-none focus:ring-sky-500 sm:text-sm"
@@ -101,6 +113,7 @@ export default function TaskModal({ isOpen, setIsOpen }) {
                         <Textarea
                           variant="underlined"
                           name="description"
+                          defaultValue={description}
                           label="Description"
                           labelPlacement="outside"
                           placeholder="Enter your task description"
@@ -118,6 +131,7 @@ export default function TaskModal({ isOpen, setIsOpen }) {
                         <input
                           name="deadline-date"
                           type="date"
+                          defaultValue={deadlineDate}
                           required
                           className="px-2 py-3 mt-1 block w-full rounded-md shadow-sm focus:border-sky-500 focus:outline-none focus:ring-sky-500 sm:text-sm"
                         />
@@ -132,6 +146,7 @@ export default function TaskModal({ isOpen, setIsOpen }) {
                           name="deadline-time"
                           type="time"
                           required
+                          defaultValue={deadlineTime}
                           className="px-2 py-3 mt-1 block w-full rounded-md shadow-sm focus:border-sky-500 focus:outline-none focus:ring-sky-500 sm:text-sm"
                         />
                       </div>
