@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Textarea } from "@nextui-org/react";
 import TitleDescription from "../../../Shared/TitleDescription";
 import Priority from "./Priority";
@@ -16,9 +16,13 @@ import { UseAuth } from "../../../Hooks/UseAuth";
 import TaskModal from "../../Ui/Modal/Modal";
 import { useGetData } from "../../../Hooks/useGetData";
 import Swal from "sweetalert2";
+import { TaskContext } from "../../../Providers/TaskProvider";
 
 const ToDoList = () => {
   const { user } = UseAuth();
+  const { handleDeleteTask } = useContext(TaskContext)
+  
+
   // api instance
   const xiosPublic = usePublicApi();
   const { data, isLoading, refetch } = useGetData(
@@ -60,6 +64,7 @@ const ToDoList = () => {
     // api for storing each task
     const response = await xiosPublic.post(`task`, task);
     const isTheTaskStored = await response.data;
+    
 
     if (isTheTaskStored.insertedId) {
       successToast("Task added");
@@ -81,30 +86,7 @@ const ToDoList = () => {
   };
 
   //  Event for deleting an added task
-  const handleDeleteTask = async (_id) => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        const response = await xiosPublic.delete(`task?id=${_id}`);
-        const isTaskDeleted = await response.data;
-        if (isTaskDeleted.deletedCount > 0) {
-          refetch();
-          Swal.fire({
-            title: "Deleted!",
-            text: "Your file has been deleted.",
-            icon: "success",
-          });
-        }
-      }
-    });
-  };
+ 
   return (
     <div className="lg:flex relative">
       {/* CustomModal component */}
@@ -229,7 +211,7 @@ const ToDoList = () => {
                 <p className="text-[#767575] mt-2 ">{task.description} </p>
                 <div className="flex gap-2 absolute top-2 right-2 ">
                   <AiFillDelete
-                    onClick={() => handleDeleteTask(task._id)}
+                    onClick={() => handleDeleteTask(task._id,refetch)}
                     className=" cursor-pointer text-[#ff6c6c] text-[20px] "
                   />
                   <AiTwotoneEdit

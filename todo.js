@@ -28,6 +28,16 @@
  *  send the id and recieve it
  *  find the task, delete and inform client 
  *  Show the that deleted by refetching
+ * 
+ * 
+ * 
+//  ---------------- Dashboard ----------
+ * TODO: Fetch all the tasks were added
+ * TODO: Show them in the ui 
+ * 
+ * 
+ * ##3 
+ * TODO: Notification for deadline
  * ---------------- home -------------
       * TODO: Quote slide must be relevant quote text
  * 
