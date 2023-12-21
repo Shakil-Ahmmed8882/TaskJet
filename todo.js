@@ -14,7 +14,11 @@
  *  Add the task in the right column with nice ui feel
  *  Show the priority in the corner with light accent hererigenious color
  * 
- * TODO: 
+ * TODO: Add a modal to edit the task
+ * TODO: get the modal updated value 
+ * TODO: send it to the backend and recieve
+ * TODO: edit and updated send result to the client 
+ * TODO: edit a single task
  * 
  * 
  * 

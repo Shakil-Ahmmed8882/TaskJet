@@ -13,15 +13,13 @@ import usePublicApi from "../../../Hooks/usePublicApi";
 import { successToast } from "../../../utils/SuccessToast";
 import { errorToast } from "../../../utils/ErrorToast";
 import { UseAuth } from "../../../Hooks/UseAuth";
+import TaskModal from "../../Ui/Modal/Modal";
 
 const ToDoList = () => {
-
-
-  const {user} =  UseAuth()
+  const { user } = UseAuth();
   const [tasks, setTasks] = useState([]);
   // api instance
   const xiosPublic = usePublicApi();
-  
 
   // Priority state management
   const [selectedPriority, setSelectedPriority] = useState("");
@@ -44,7 +42,7 @@ const ToDoList = () => {
 
     // Store deadline in the task object
     task.deadline = deadline;
-    task.email = user? user.email: null
+    task.email = user ? user.email : null;
 
     task.priority = selectedPriority ? selectedPriority : "Moderate";
     setTasks([...tasks, task]);
@@ -55,15 +53,25 @@ const ToDoList = () => {
     const response = await xiosPublic.post("task", task);
     const isTheTaskStored = await response.data;
 
-    if(isTheTaskStored.insertedId){
-      successToast("Task added")
-    } else{
-      errorToast("Somehing went wrong! Try again!")
+    if (isTheTaskStored.insertedId) {
+      successToast("Task added");
+    } else {
+      errorToast("Somehing went wrong! Try again!");
     }
+  };
+
+  // Editing modal handling here..
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleModalOpen = () => {
+    setIsModalOpen(true); // Function to set the modal as open
   };
 
   return (
     <div className="lg:flex relative">
+      {/* CustomModal component */}
+
       <div className="flex  flex-1 justify-center p-4">
         <div className="w-full lg:max-w-md">
           <div className="bg-[white] sticky top-2  shadow-md rounded-md p-8">
@@ -181,9 +189,14 @@ const ToDoList = () => {
                   </span>
                 </div>
                 <p className="text-[#767575] mt-2 ">{task.description} </p>
-                <div className="flex gap-2 absolute top-2 right-2">
-                  <AiFillDelete className=" cursor-pointer text-[#ff6c6c] text-[17px]" />
-                  <AiTwotoneEdit className=" cursor-pointer text-[17px]" />
+                <div className="flex gap-2 absolute top-2 right-2 ">
+                  <AiFillDelete className=" cursor-pointer text-[#ff6c6c] text-[20px] " />
+                  <AiTwotoneEdit
+                    onClick={handleModalOpen}
+                    className=" cursor-pointer text-[20px]"
+                  />
+                  {/* when click on edit this below modal will be displayed */}
+                  <TaskModal isOpen={isModalOpen} setIsOpen={setIsModalOpen} />
                 </div>
               </li>
             ))
