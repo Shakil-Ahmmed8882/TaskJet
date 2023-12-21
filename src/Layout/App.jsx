@@ -27,7 +27,7 @@ function App() {
           
         
         </div>
-        <div className="md:px-6 mt-8">
+        <div className="md:px-6 mt-8 bg-[#f4fafb]">
           <Outlet />
         </div>
 

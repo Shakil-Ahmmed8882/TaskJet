@@ -1,0 +1,19 @@
+/* Add this CSS code to your stylesheet */
+
+/* Define a class for the sticky container */
+.sticky-container {
+      display: flex;
+      position: relative;
+    }
+    
+    /* Style the sticky element */
+    .sticky-element {
+      position: -webkit-sticky;
+      background-color: red !important;
+      position: sticky;
+      top: 1rem; /* Adjust the top position as needed */
+      z-index: 100; /* Set an appropriate z-index */
+      background-color: #FFFFFF; /* Optional: Background color */
+      padding: 1rem; /* Optional: Add padding */
+    }
+    
