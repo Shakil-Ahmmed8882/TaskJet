@@ -15,18 +15,20 @@ import { errorToast } from "../../../utils/ErrorToast";
 import { UseAuth } from "../../../Hooks/UseAuth";
 import TaskModal from "../../Ui/Modal/Modal";
 import { useGetData } from "../../../Hooks/useGetData";
+import Swal from "sweetalert2";
 
 const ToDoList = () => {
   const { user } = UseAuth();
   // api instance
   const xiosPublic = usePublicApi();
-  const {data,isLoading,refetch} = useGetData(`/tasks?email=${user&&user.email}`,user?.email)
+  const { data, isLoading, refetch } = useGetData(
+    `/tasks?email=${user && user.email}`,
+    user?.email
+  );
 
-  if(isLoading) "loding.."
-  
+  if (isLoading) "loding..";
 
-const tasks  = data || []
-
+  const tasks = data || [];
 
   // Priority state management
   const [selectedPriority, setSelectedPriority] = useState("");
@@ -61,22 +63,48 @@ const tasks  = data || []
 
     if (isTheTaskStored.insertedId) {
       successToast("Task added");
-      refetch()
+      refetch();
     } else {
       errorToast("Somehing went wrong! Try again!");
     }
   };
 
   // Editing modal handling here..
-
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [taskId, setTaskId] = useState("");
 
   const handleModalOpen = (_id) => {
+    refetch()
     setIsModalOpen(true); // Function to set the modal as open
-    setTaskId(_id)
+    setTaskId(_id);
+
   };
 
+  //  Event for deleting an added task
+  const handleDeleteTask = async (_id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const response = await xiosPublic.delete(`task?id=${_id}`);
+        const isTaskDeleted = await response.data;
+        if (isTaskDeleted.deletedCount > 0) {
+          refetch();
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your file has been deleted.",
+            icon: "success",
+          });
+        }
+      }
+    });
+  };
   return (
     <div className="lg:flex relative">
       {/* CustomModal component */}
@@ -167,7 +195,7 @@ const tasks  = data || []
       <div className=" bg-[white] flex-1 h-[1000px]">
         <ul className="p-5">
           {/* maping the newly added task */}
-          
+
           {tasks?.length > 0 ? (
             tasks?.map((task, index) => (
               <li
@@ -200,13 +228,21 @@ const tasks  = data || []
                 </div>
                 <p className="text-[#767575] mt-2 ">{task.description} </p>
                 <div className="flex gap-2 absolute top-2 right-2 ">
-                  <AiFillDelete className=" cursor-pointer text-[#ff6c6c] text-[20px] " />
+                  <AiFillDelete
+                    onClick={() => handleDeleteTask(task._id)}
+                    className=" cursor-pointer text-[#ff6c6c] text-[20px] "
+                  />
                   <AiTwotoneEdit
-                    onClick={()=> handleModalOpen(task._id)}
+                    onClick={() => handleModalOpen(task._id)}
                     className=" cursor-pointer text-[20px]"
                   />
                   {/* when click on edit this below modal will be displayed */}
-                  <TaskModal refresh={refetch} isOpen={isModalOpen} setIsOpen={setIsModalOpen} taskId={taskId}/>
+                  <TaskModal
+                    refresh={refetch}
+                    isOpen={isModalOpen}
+                    setIsOpen={setIsModalOpen}
+                    taskId={taskId}
+                  />
                 </div>
               </li>
             ))

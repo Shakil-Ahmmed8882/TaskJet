@@ -16,7 +16,6 @@ import { useGetData } from "../../../Hooks/useGetData";
 
 export default function TaskModal({refresh, isOpen, setIsOpen, taskId }) {
   //   Api instance
-
   const xiosPublic = usePublicApi();
   //   set up priority of the task
   const [selectedPriority, setSelectedPriority] = useState("");
@@ -27,6 +26,7 @@ export default function TaskModal({refresh, isOpen, setIsOpen, taskId }) {
   );
 
   if (isLoading) return 
+  refetch()
 
 
 

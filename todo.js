@@ -15,11 +15,19 @@
  *  Show the priority in the corner with light accent hererigenious color
  * 
  * Add a modal to edit the task
- * TODO: get the modal updated value 
- * TODO: send it to the backend and recieve
- * TODO: edit and updated send result to the client 
- * TODO: edit a single task
+ *  get the modal updated value 
+ *  send it to the backend and recieve
+ *  edit and updated send result to the client 
+ *  edit a single task
  * 
+ * 
+ * ------------- Delete ---------------
+ *  Take the confirmation that user wants to delete or not
+ *  get the task id
+ *  create a backend api 
+ *  send the id and recieve it
+ *  find the task, delete and inform client 
+ *  Show the that deleted by refetching
  * ---------------- home -------------
       * TODO: Quote slide must be relevant quote text
  * 
