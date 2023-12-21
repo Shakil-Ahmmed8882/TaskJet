@@ -14,12 +14,21 @@ import { successToast } from "../../../utils/SuccessToast";
 import { errorToast } from "../../../utils/ErrorToast";
 import { UseAuth } from "../../../Hooks/UseAuth";
 import TaskModal from "../../Ui/Modal/Modal";
+import { useGetData } from "../../../Hooks/useGetData";
 
 const ToDoList = () => {
   const { user } = UseAuth();
-  const [tasks, setTasks] = useState([]);
   // api instance
   const xiosPublic = usePublicApi();
+  const {data,isLoading,refetch} = useGetData("/tasks","all-tasks")
+
+  if(isLoading) "loding.."
+
+  console.log(data)
+  
+
+const tasks  = data || []
+
 
   // Priority state management
   const [selectedPriority, setSelectedPriority] = useState("");
@@ -35,8 +44,8 @@ const ToDoList = () => {
 
     //  Set deadline to the task with time
     // Extract and combine date and time values for the deadline
-    const deadlineDate = form.get("deadline-date");
-    const deadlineTime = form.get("deadline-time");
+    const deadlineDate = form.get("deadlineDate");
+    const deadlineTime = form.get("deadlineTime");
     // Combine date and time
     const deadline = `${deadlineDate} ${deadlineTime}`;
 
@@ -45,7 +54,6 @@ const ToDoList = () => {
     task.email = user ? user.email : null;
 
     task.priority = selectedPriority ? selectedPriority : "Moderate";
-    setTasks([...tasks, task]);
 
     // e.target.reset(); // Reset the form after adding the task
 
@@ -55,6 +63,7 @@ const ToDoList = () => {
 
     if (isTheTaskStored.insertedId) {
       successToast("Task added");
+      refetch()
     } else {
       errorToast("Somehing went wrong! Try again!");
     }
@@ -122,7 +131,7 @@ const ToDoList = () => {
                       Deadline Date
                     </label>
                     <input
-                      name="deadline-date"
+                      name="deadlineDate"
                       type="date"
                       required
                       className="px-2 py-3 mt-1 block w-full rounded-md shadow-sm focus:border-sky-500 focus:outline-none focus:ring-sky-500 sm:text-sm"
@@ -135,7 +144,7 @@ const ToDoList = () => {
                       Deadline Time
                     </label>
                     <input
-                      name="deadline-time"
+                      name="deadlineTime"
                       type="time"
                       required
                       className="px-2 py-3 mt-1 block w-full rounded-md shadow-sm focus:border-sky-500 focus:outline-none focus:ring-sky-500 sm:text-sm"
@@ -158,8 +167,9 @@ const ToDoList = () => {
       <div className=" bg-[white] flex-1 h-[1000px]">
         <ul className="p-5">
           {/* maping the newly added task */}
-          {tasks.length > 0 ? (
-            tasks.map((task, index) => (
+          
+          {tasks?.length > 0 ? (
+            tasks?.map((task, index) => (
               <li
                 key={index}
                 className={` relative border-l-3 ${
