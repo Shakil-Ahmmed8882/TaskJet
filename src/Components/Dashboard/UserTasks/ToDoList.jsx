@@ -9,20 +9,28 @@ import { BiCheck } from "react-icons/bi";
 import { AiFillDelete } from "react-icons/ai";
 import { AiTwotoneEdit } from "react-icons/ai";
 import SkeletonListLoader from "../../Ui/Skeleton/SkeletonListLoader";
+import usePublicApi from "../../../Hooks/usePublicApi";
+import { successToast } from "../../../utils/SuccessToast";
+import { errorToast } from "../../../utils/ErrorToast";
+import { UseAuth } from "../../../Hooks/UseAuth";
 
 const ToDoList = () => {
-  const [tasks, setTasks] = useState([]);
 
-  console.log(tasks);
+
+  const {user} =  UseAuth()
+  const [tasks, setTasks] = useState([]);
+  // api instance
+  const xiosPublic = usePublicApi();
+  
 
   // Priority state management
-  const [selectedPriority, setSelectedPriority] = useState("Set Priority");
+  const [selectedPriority, setSelectedPriority] = useState("");
 
   const handlePrioritySelect = (priority) => {
     setSelectedPriority(priority.label); // Update selected priority text
   };
 
-  const handleAddTask = (e) => {
+  const handleAddTask = async (e) => {
     e.preventDefault();
     const form = new FormData(e.target);
     const task = Object.fromEntries(form);
@@ -31,21 +39,33 @@ const ToDoList = () => {
     // Extract and combine date and time values for the deadline
     const deadlineDate = form.get("deadline-date");
     const deadlineTime = form.get("deadline-time");
-    const deadline = `${deadlineDate} ${deadlineTime}`; // Combine date and time
+    // Combine date and time
+    const deadline = `${deadlineDate} ${deadlineTime}`;
 
-    task.deadline = deadline; // Store deadline in the task object
+    // Store deadline in the task object
+    task.deadline = deadline;
+    task.email = user? user.email: null
 
-      console.log(deadline)
+    task.priority = selectedPriority ? selectedPriority : "Moderate";
+    setTasks([...tasks, task]);
 
-    task.priority = selectedPriority;
-    setTasks([...tasks, task]); // Update tasks array with the new task
-    e.target.reset(); // Reset the form after adding the task
+    // e.target.reset(); // Reset the form after adding the task
+
+    // api for storing each task
+    const response = await xiosPublic.post("task", task);
+    const isTheTaskStored = await response.data;
+
+    if(isTheTaskStored.insertedId){
+      successToast("Task added")
+    } else{
+      errorToast("Somehing went wrong! Try again!")
+    }
   };
 
   return (
-    <div className="flex relative">
+    <div className="lg:flex relative">
       <div className="flex  flex-1 justify-center p-4">
-        <div className="w-full max-w-md">
+        <div className="w-full lg:max-w-md">
           <div className="bg-[white] sticky top-2  shadow-md rounded-md p-8">
             <div className="flex items-center">
               <TitleDescription title={"To do list"} />
@@ -87,35 +107,33 @@ const ToDoList = () => {
                 </div>
                 {/* Deadline starts here */}
                 <div className="flex space-x-4 mt-5">
-                <div>
-                  <label
-                    htmlFor="deadline-date"
-                    className="block font-bold text-sm text-gray-700"
-                  >
-                    Deadline Date
-                  </label>
-                  <input
-                    name="deadline-date"
-                    type="date"
-                    required
-                    className="px-2 py-3 mt-1 block w-full rounded-md shadow-sm focus:border-sky-500 focus:outline-none focus:ring-sky-500 sm:text-sm"
-                  />
+                  <div>
+                    <label
+                      htmlFor="deadline-date"
+                      className="block font-bold text-sm text-gray-700">
+                      Deadline Date
+                    </label>
+                    <input
+                      name="deadline-date"
+                      type="date"
+                      required
+                      className="px-2 py-3 mt-1 block w-full rounded-md shadow-sm focus:border-sky-500 focus:outline-none focus:ring-sky-500 sm:text-sm"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="deadline-time"
+                      className="block font-bold text-sm text-gray-700">
+                      Deadline Time
+                    </label>
+                    <input
+                      name="deadline-time"
+                      type="time"
+                      required
+                      className="px-2 py-3 mt-1 block w-full rounded-md shadow-sm focus:border-sky-500 focus:outline-none focus:ring-sky-500 sm:text-sm"
+                    />
+                  </div>
                 </div>
-                <div>
-                  <label
-                    htmlFor="deadline-time"
-                    className="block font-bold text-sm text-gray-700"
-                  >
-                    Deadline Time
-                  </label>
-                  <input
-                    name="deadline-time"
-                    type="time"
-                    required
-                    className="px-2 py-3 mt-1 block w-full rounded-md shadow-sm focus:border-sky-500 focus:outline-none focus:ring-sky-500 sm:text-sm"
-                  />
-                </div>
-              </div>
                 {/* Deadline ends here */}
               </div>
               <div>
@@ -143,27 +161,26 @@ const ToDoList = () => {
                     ? "border-l-[orange]"
                     : "border-l-[red]"
                 } bg-[white] shadow-lg my-5 rounded-lg p-2`}>
-                  <div>
-                <div className="flex items-center gap-1">
-                  <h2 className="text-[16px] mb-1 font-semibold">
-                    {task.title} First task title
-                  </h2>
-                  <span className="text-[20px] font-bold">
-                    {task.priority === "High" ? (
-                      <BiSolidCheckCircle className={`text-greenAccent`} />
-                    ) : task.priority === "Moderate" ? (
-                      <BiCalendarCheck className="text-[orange]" />
-                    ) : (
-                      <BiCheck className="text-[red]" />
-                    )}
+                <div>
+                  <div className="flex items-center gap-1">
+                    <h2 className="text-[16px] mb-1 font-semibold">
+                      {task.title} First task title
+                    </h2>
+                    <span className="text-[20px] font-bold">
+                      {task.priority === "High" ? (
+                        <BiSolidCheckCircle className={`text-greenAccent`} />
+                      ) : task.priority === "Moderate" ? (
+                        <BiCalendarCheck className="text-[orange]" />
+                      ) : (
+                        <BiCheck className="text-[red]" />
+                      )}
+                    </span>
+                  </div>
+                  <span className="bg-[#E4F4FD] p-1 text-[13px] text-accentColor rounded-lg">
+                    {task.deadline}
                   </span>
                 </div>
-                <span className="bg-[#E4F4FD] p-1 text-[13px] text-accentColor rounded-lg">{task.deadline}</span>
-
-                  </div>
-                <p className="text-[#767575] mt-2 ">
-                  {task.description}{" "}
-                </p>
+                <p className="text-[#767575] mt-2 ">{task.description} </p>
                 <div className="flex gap-2 absolute top-2 right-2">
                   <AiFillDelete className=" cursor-pointer text-[#ff6c6c] text-[17px]" />
                   <AiTwotoneEdit className=" cursor-pointer text-[17px]" />
@@ -173,13 +190,10 @@ const ToDoList = () => {
           ) : (
             <div className="w-full h-full flex flex-col  justify-center">
               <h1 className="text-4xl mb-8">Add your To-do here..</h1>
-              
 
-              <SkeletonListLoader/>
-              <SkeletonListLoader/>
-              <SkeletonListLoader/>
-              
-
+              <SkeletonListLoader />
+              <SkeletonListLoader />
+              <SkeletonListLoader />
             </div>
           )}
         </ul>

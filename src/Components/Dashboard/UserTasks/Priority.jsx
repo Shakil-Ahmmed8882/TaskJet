@@ -30,7 +30,7 @@ export default function Priority({handlePrioritySelect,selectedPriority}) {
     <Dropdown>
       <DropdownTrigger>
         <Button variant="bordered" className=" text-accentColor">
-          {selectedPriority}
+          {selectedPriority?selectedPriority:"Set Priority"}
         </Button>
       </DropdownTrigger>
       <DropdownMenu aria-label="Priority Options" items={items}>
