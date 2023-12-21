@@ -1,5 +1,4 @@
 import { Outlet, useLocation } from "react-router-dom";
-import Footer from "../Components/Footer/Footer";
 import DashboardRoutes from "../Components/Dashboard/DashboardRoutes";
 import TopSearchBar from "../Components/Dashboard/TopSearchBar";
 import ProfileAndNotification from "../Components/Navbar/ProfileAndNotification";
@@ -32,9 +31,6 @@ function App() {
           <Outlet />
         </div>
 
-        <div className="px-6">
-          <Footer></Footer>
-        </div>
       </div>
     </div>
   );

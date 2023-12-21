@@ -36,48 +36,48 @@ const DashboardRoutes = () => {
               Home
             </li>
           </Link>
-          <Link to="/quick_start">
+          <Link to="/dashboard/quick_start">
             <li className="flex items-center gap-2">
               <BiHomeSmile />
               Quick start
             </li>
           </Link>
-          <Link to="/tasks">
+          <Link to="/dashboard/tasks">
             <li className="flex items-center gap-2">
               <BiTask />
               Tasks
             </li>
           </Link>
-          <Link to="/notes">
+          <Link to="/dashboard/notes">
             <li className="flex items-center gap-2">
               <BiNote />
               Notes
             </li>
           </Link>
-          <Link to="/archive">
+          <Link to="/dashboard/archive">
             <li className="flex items-center gap-2">
               <BiArchive />
               Archive
             </li>
           </Link>
-          <Link to="/calendar">
+          <Link to="/dashboard/calendar">
             <li className="flex items-center gap-2">
               <BiCalendar /> Calendar
             </li>
           </Link>
-          <Link to="/categories">
+          <Link to="/dashboard/categories">
             <li className="flex items-center gap-2">
               <BiCategory />
               Categories
             </li>
           </Link>
-          <Link to="/statistics">
+          <Link to="/dashboard/statistics">
             <li className="flex items-center gap-2">
               <CiCircleChevDown />
               Statistics
             </li>
           </Link>
-          <Link to="/template">
+          <Link to="/dashboard/template">
             <li className="flex items-center gap-2">
               <img
                 src="https://i.ibb.co/6ghZckZ/icons8-template-100.png"
@@ -87,7 +87,7 @@ const DashboardRoutes = () => {
               Templates
             </li>
           </Link>
-          <Link to="/remainders">
+          <Link to="/dashboard/remainders">
             <li className="flex items-center gap-2">
               <img
                 src="https://i.ibb.co/wY5Q7nY/icons8-remainder-64.png"
@@ -97,7 +97,7 @@ const DashboardRoutes = () => {
               Remainders
             </li>
           </Link>
-          <Link to="collaboration">
+          <Link to="/dashboard/collaboration">
             <li className="flex items-center gap-2">
               <img
                 src="https://i.ibb.co/z46yBs2/icons8-community-50.png"
@@ -107,13 +107,13 @@ const DashboardRoutes = () => {
               Collaboration
             </li>
           </Link>
-          <Link to="deadline_tracker">
+          <Link to="/dashboard/deadline_tracker">
             <li className="flex items-center gap-2">
               <BsClockHistory />
               Deadline tracker
             </li>
           </Link>
-          <Link to="/progress_tracker">
+          <Link to="/dashboard/progress_tracker">
             <li className="flex items-center gap-2">
               <img
                 className="w-[18px]"
@@ -123,13 +123,13 @@ const DashboardRoutes = () => {
               Progress tracker
             </li>
           </Link>
-          <Link to="/notifications">
+          <Link to="/dashboard/notifications">
             <li className="flex items-center gap-2">
               <BsBell />
               Notifications
             </li>
           </Link>
-          <Link to="setting">
+          <Link to="/dashboard/setting">
             <li className="flex items-center gap-2">
               {" "}
               <BsGear />

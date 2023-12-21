@@ -13,25 +13,25 @@ const Login = () => {
   const { user, signIn, googleSignIn } = UseAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const goTo = useNavigate()
+  const goTo = useNavigate();
 
   //   validation
 
   const handleLogin = (e) => {
-      e.preventDefault()
+    e.preventDefault();
 
     signIn(email, password)
-    .then(()=> {
-      successToast("Signed in")
-      goTo("/dashboard")
-    })
-    .catch(err => errorToast(err.message))
+      .then(() => {
+        successToast("Signed in");
+        goTo("/dashboard");
+      })
+      .catch((err) => errorToast(err.message));
   };
 
   const handleMedia = (media) => {
     media()
-    .then(()=> successToast("signed in with google"))
-    .catch(err => console.log(err))
+      .then(() => successToast("signed in with google"))
+      .catch((err) => console.log(err));
   };
   return (
     <div>
@@ -44,12 +44,13 @@ const Login = () => {
             />
           </header>
           <div className="text-center flex items-center justify-center py-8">
-            <div onClick={() => handleMedia(googleSignIn)}
- className="bg-[white] shadow-sm p-2 rounded-full">
-              <BsGoogle className="text-2xl text-[#8c00ff]" />
+            <div
+              onClick={() => handleMedia(googleSignIn)}
+              className="bg-[white] shadow-sm p-2 rounded-full">
+              <BsGoogle className="text-2xl text-accentColor" />
             </div>
             <span className="text-[#9CA3AF] text-[18px]">
-              Sign in with google
+              Continue with google
             </span>
           </div>
           <form onSubmit={handleLogin}>

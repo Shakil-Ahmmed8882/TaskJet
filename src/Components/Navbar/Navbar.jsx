@@ -2,9 +2,7 @@ import React from "react";
 import {
   Navbar,
   NavbarContent,
-  NavbarItem,
   Link,
-  Button,
   NavbarMenuToggle,
   NavbarMenu,
   NavbarMenuItem,
@@ -13,12 +11,10 @@ import { CiMenuFries } from "react-icons/ci";
 
 
 import { menuItems } from "./MenuItems";
-import { NavLink, useNavigate } from "react-router-dom";
 import { BsFilterRight } from "react-icons/bs";
 
 export default function TopNavbar() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-  const goTo = useNavigate();
 
   
   
@@ -27,7 +23,7 @@ export default function TopNavbar() {
       onMenuOpenChange={setIsMenuOpen}
       maxWidth=""
       style={{ backgroundColor: "" }}>
-      <NavbarContent className="relative flex md:hidden ">
+      <NavbarContent className="relative  flex md:hidden ">
         <NavbarMenuToggle
         className=" h-8"
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -43,31 +39,7 @@ export default function TopNavbar() {
           Filter
           <BsFilterRight className="text-[20px]" />
         </div>
-        <NavLink
-          exact
-          to="/login"
-          activeClassName="active"
-          className="flex items-center">
-          <span>Login</span>
-        </NavLink>
-        <NavbarItem>
-          <Button
-            onClick={() => goTo("/signup")}
-            as={Link}
-            color="primary"
-            variant="flat">
-            Sign Up
-          </Button>
-        </NavbarItem>
-        <NavbarItem>
-          <Button
-            onClick={() =>handleLogOut() }
-            as={Link}
-            color="primary"
-            variant="flat">
-            Sign out
-          </Button>
-        </NavbarItem>
+     
       </NavbarContent>
       
 

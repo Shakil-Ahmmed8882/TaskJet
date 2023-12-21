@@ -1,25 +1,28 @@
-import { Avatar, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from "@nextui-org/react";
+import {
+  Avatar,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
+} from "@nextui-org/react";
 import { UseAuth } from "../../Hooks/UseAuth";
 import { useNavigate } from "react-router-dom";
 import { successToast } from "../../utils/SuccessToast";
 
-
 const ProfileDropdown = () => {
-      const {logOut} = UseAuth()
-      const goTo = useNavigate()
+  const { logOut } = UseAuth();
+  const goTo = useNavigate();
 
+  const handleLogOut = () => {
+    goTo("/");
+    logOut()
+      .then(() => successToast("Signed out"))
+      .catch((err) => console.log(err));
+  };
 
-      const handleLogOut = () => {
-            goTo("/")
-            logOut()
-            .then(() => successToast("Signed out"))
-            .catch(err => console.log(err))
-        
-          }
-        
-      return (
-            <div>
- <Dropdown placement="bottom-end">
+  return (
+    <div>
+      <Dropdown placement="bottom-end">
         <DropdownTrigger>
           <Avatar
             isBordered
@@ -33,25 +36,40 @@ const ProfileDropdown = () => {
             <p className="font-semibold">Signed in as</p>
             <p className="font-semibold">zoey@example.com</p>
           </DropdownItem>
-          <DropdownItem key="settings">
-            My Settings
+          {/* To Do List
+Ongoing Tasks
+Completed Tasks */}
+          <DropdownItem
+            key="help_and_feedback"
+            onClick={() => goTo("/dashboard/my_dashboard")}>
+            My Dashboard
           </DropdownItem>
-          <DropdownItem key="team_settings">Team Settings</DropdownItem>
-          <DropdownItem key="analytics">
-            Analytics
+          <DropdownItem
+            key="help_and_feedback"
+            onClick={() => goTo("/dashboard/to_do_list")}>
+            To Do List
           </DropdownItem>
-          <DropdownItem key="system">System</DropdownItem>
-          <DropdownItem key="configurations">Configurations</DropdownItem>
-          <DropdownItem key="help_and_feedback">
-            Help & Feedback
+          <DropdownItem
+            key="help_and_feedback"
+            onClick={() => goTo("/dashboard/ongoing_tasks")}>
+            Ongoing Tasks
           </DropdownItem>
-          <DropdownItem onClick={() => handleLogOut()} key="logout" color="danger">
-            Log Out
+          <DropdownItem
+            key="help_and_feedback"
+            onClick={() => goTo("/dashboard/completed_tasks")}>
+            completed Tasks
+          </DropdownItem>
+
+          <DropdownItem
+            onClick={() => handleLogOut()}
+            key="logout"
+            color="danger">
+            Logout/Sign Out
           </DropdownItem>
         </DropdownMenu>
-      </Dropdown>                  
-            </div>
-      );
+      </Dropdown>
+    </div>
+  );
 };
 
 export default ProfileDropdown;
