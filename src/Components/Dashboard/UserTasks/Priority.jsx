@@ -7,7 +7,7 @@ import {
   Button,
 } from "@nextui-org/react";
 
-export default function Priority({handlePrioritySelect,selectedPriority}) {
+export default function Priority({handlePrioritySelect,selectedPriority,defaultPriority}) {
 
   const items = [
     {
@@ -30,7 +30,8 @@ export default function Priority({handlePrioritySelect,selectedPriority}) {
     <Dropdown>
       <DropdownTrigger>
         <Button variant="bordered" className=" text-accentColor">
-          {selectedPriority?selectedPriority:"Set Priority"}
+        {selectedPriority ? selectedPriority : (defaultPriority ? defaultPriority : "Set Priority")}
+
         </Button>
       </DropdownTrigger>
       <DropdownMenu aria-label="Priority Options" items={items}>

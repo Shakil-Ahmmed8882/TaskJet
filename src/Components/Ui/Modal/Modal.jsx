@@ -14,7 +14,7 @@ import { successToast } from "../../../utils/SuccessToast";
 import { errorToast } from "../../../utils/ErrorToast";
 import { useGetData } from "../../../Hooks/useGetData";
 
-export default function TaskModal({ isOpen, setIsOpen, taskId }) {
+export default function TaskModal({refresh, isOpen, setIsOpen, taskId }) {
   //   Api instance
 
   const xiosPublic = usePublicApi();
@@ -26,7 +26,7 @@ export default function TaskModal({ isOpen, setIsOpen, taskId }) {
     taskId
   );
 
-  if (isLoading) return "loading..";
+  if (isLoading) return 
 
 
 
@@ -39,35 +39,38 @@ export default function TaskModal({ isOpen, setIsOpen, taskId }) {
   };
 
   //edit event
+  
   const handleEditTask = async (e) => {
-    e.preventDefault();
-    const form = new FormData(e.target);
-    const task = Object.fromEntries(form);
+      e.preventDefault();
+      const form = new FormData(e.target);
+      const task = {};
+  
+      for (let [fieldName, value] of form.entries()) {
+        task[fieldName] = value;
+      }
+  
+      const deadlineDate = task["deadlineDate"];
+      const deadlineTime = task["deadlineTime"];
+      task.deadline = `${deadlineDate} ${deadlineTime}`;
+  
+      task.priority = selectedPriority ? selectedPriority : "Moderate";
+  
+      try {
+        const response = await xiosPublic.put(`/task?id=${taskId}`, task);
+        const isTaskModified = await response.data;
+  
+        if (isTaskModified.modifiedCount > 0) {
+          successToast("Updated");
+          refresh()
+        } else {
+          errorToast("Something went wrong! Try again!");
+        }
+      } catch (error) {
+        errorToast("An error occurred while updating the task!");
+      }
 
-    //  Set deadline to the task with time
-    // Extract and combine date and time values for the deadline
-    const deadlineDate = form.get("deadline-date");
-    const deadlineTime = form.get("deadline-time");
-    // Combine date and time
-    const deadline = `${deadlineDate} ${deadlineTime}`;
-
-    // Store deadline in the task object
-    task.deadline = deadline;
-
-    task.priority = selectedPriority ? selectedPriority : "Moderate";
-
-    // e.target.reset(); // Reset the form after adding the task
-
-    // api for storing each task
-    const response = await xiosPublic.post("task", task);
-    const isTheTaskStored = await response.data;
-
-    if (isTheTaskStored.insertedId) {
-      successToast("Task added");
-    } else {
-      errorToast("Somehing went wrong! Try again!");
-    }
-  };
+    };
+  
   return (
     <div className="flex flex-col gap-2">
       {/* <Button onPress={onOpen}>Open Modal</Button> */}
@@ -94,6 +97,7 @@ export default function TaskModal({ isOpen, setIsOpen, taskId }) {
                       <Priority
                         handlePrioritySelect={handlePrioritySelect}
                         selectedPriority={selectedPriority}
+                        defaultPriority={priority}
                       />
                     </div>
                     <div className="mt-1 border-b-1 border-b-[#80808082]">
@@ -129,7 +133,7 @@ export default function TaskModal({ isOpen, setIsOpen, taskId }) {
                           Deadline Date
                         </label>
                         <input
-                          name="deadline-date"
+                          name="deadlineDate"
                           type="date"
                           defaultValue={deadlineDate}
                           required
@@ -143,7 +147,7 @@ export default function TaskModal({ isOpen, setIsOpen, taskId }) {
                           Deadline Time
                         </label>
                         <input
-                          name="deadline-time"
+                          name="deadlineTime"
                           type="time"
                           required
                           defaultValue={deadlineTime}
@@ -161,7 +165,7 @@ export default function TaskModal({ isOpen, setIsOpen, taskId }) {
                       onClick={() => setIsOpen(false)}>
                       Close
                     </Button>
-                    <Button type="submit" color="primary" onPress={onClose}>
+                    <Button type="submit" onClick={()=> setIsOpen(false)} color="primary" onPress={onClose}>
                       Done
                     </Button>
                   </ModalFooter>

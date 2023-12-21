@@ -206,7 +206,7 @@ const tasks  = data || []
                     className=" cursor-pointer text-[20px]"
                   />
                   {/* when click on edit this below modal will be displayed */}
-                  <TaskModal isOpen={isModalOpen} setIsOpen={setIsModalOpen} taskId={taskId}/>
+                  <TaskModal refresh={refetch} isOpen={isModalOpen} setIsOpen={setIsModalOpen} taskId={taskId}/>
                 </div>
               </li>
             ))
