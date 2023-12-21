@@ -3,18 +3,19 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import { RouterProvider } from "react-router-dom";
 import { router } from "./Routers/Routers";
-import {NextUIProvider} from "@nextui-org/react";
-
-
+import { NextUIProvider } from "@nextui-org/react";
+import AuthProvider from "./Providers/AuthProvider";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <div >
+    {/* Next ui */}
     <NextUIProvider>
-    <RouterProvider router={router} />
+      {/* auth */}
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
     </NextUIProvider>
 
-    </div>
     {/* Next ui Provider */}
   </React.StrictMode>
 );
