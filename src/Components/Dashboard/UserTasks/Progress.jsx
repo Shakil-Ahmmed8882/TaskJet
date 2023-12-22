@@ -3,14 +3,14 @@ import { RadioGroup, Radio } from "@nextui-org/react";
 import usePublicApi from "../../../Hooks/usePublicApi";
 import Swal from "sweetalert2";
 
-const Progress = ({ id,state }) => {
+const Progress = ({ id, state }) => {
   const [selected, setSelected] = useState(state);
   const xiosPublic = usePublicApi();
+
   useEffect(() => {
-    // Skip the initial execution of fetchData
-    if (state !== selected) {
-      const fetchData = async () => {
-        try {
+    const fetchData = async () => {
+      try {
+        if (selected !== state) {
           const response = await xiosPublic.patch(`/task?id=${id}&state=${selected}`);
           const changedStateTask = response.data;
 
@@ -23,18 +23,27 @@ const Progress = ({ id,state }) => {
               timer: 1500
             });
           }
-        } catch (error) {
-          console.error("Error changing progress:", error);
         }
-      };
+      } catch (error) {
+        console.error("Error changing progress:", error);
+      }
+    };
 
+    // Remove automatic execution of fetchData on component mount
+    // Only execute fetchData when selected state changes
+    if (selected !== state) {
       fetchData();
     }
   }, [id, selected, state, xiosPublic]);
 
+  const handleStateChange = (newState) => {
+    // Allow users to manually change the state
+    setSelected(newState);
+  };
+
   return (
     <div className="flex items-center gap-3">
-      <RadioGroup label="" value={selected} onValueChange={setSelected}>
+      <RadioGroup label="" value={selected} onValueChange={handleStateChange}>
         <div className="flex gap-3">
           <Radio value="to-do"></Radio>
           <Radio value="ongoing"></Radio>

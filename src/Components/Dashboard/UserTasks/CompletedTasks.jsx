@@ -8,6 +8,7 @@ import TaskModal from "../../Ui/Modal/Modal";
 import SkeletonListLoader from "../../Ui/Skeleton/SkeletonListLoader";
 import { useContext, useState } from "react";
 import { TaskContext } from "../../../Providers/TaskProvider";
+import LoadingSpinner from "../../Ui/Spinner/Spinner";
 
 const CompletedTasks = () => {
   const {user} = UseAuth()
@@ -30,12 +31,18 @@ const CompletedTasks = () => {
     setTaskId(_id);
   };
   
-  if(isLoading) return "loading"
+  if(isLoading) return <LoadingSpinner/>
   console.log(tasks)
   return (
     <div>
-      <TitleDescription title={"Completed tasks"} />
-      <ul className="p-5 grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+      {
+        tasks?.length > 0 &&
+        <TitleDescription title={"Completed tasks"} />
+
+
+      }
+      <ul className={`p-5 grid grid-cols-1 ${tasks?.length && "lg:grid-cols-2"} items-center justify-center  gap-6`}>
           {/* maping the newly added task */}
 
           {tasks?.length > 0 ? (
@@ -45,7 +52,7 @@ const CompletedTasks = () => {
                 className={` relative  bg-[white] shadow-lg  rounded-lg p-5`}>
                 <div>
                   <div className="flex items-center gap-1">
-                    <h2 className="text-[20px] mb-1 font-semibold">
+                    <h2 className="text-[20px] font-semibold">
                       {task.title} 
                     </h2>
                     <span className="text-[20px] font-bold">
@@ -58,7 +65,7 @@ const CompletedTasks = () => {
                       )}
                     </span>
                   </div>
-                  <span className="bg-[#E4F4FD] p-1 text-[13px] text-accentColor rounded-lg">
+                  <span className="bg-[#E4F4FD] p-1 inline-block mt-2 text-[13px] text-accentColor rounded-lg">
                     {task.deadline}
                   </span>
                   {/* task status todo, ongoing,completed */}
@@ -89,7 +96,7 @@ const CompletedTasks = () => {
             ))
           ) : (
             <div className="w-full h-full flex flex-col  justify-center">
-              <h1 className="text-4xl mb-8">Add your To-do here..</h1>
+              <h1 className="text-4xl mb-8 text-center mt-4">No Completed task found</h1>
 
               <SkeletonListLoader />
               <SkeletonListLoader />

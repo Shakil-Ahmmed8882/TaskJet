@@ -22,9 +22,7 @@ const Home = () => {
             details={
               "When managing a project with various tasks, prioritize and focus on one task at a time. For instance, if your project involves research, dedicate focused time solely to gathering information before moving on to the next task"
             }
-            img={
-              "https://variety.com/wp-content/uploads/2017/09/jack_ma.png"
-            }
+            
             
             by={"– Jack Ma."}
             ></Quotes>
@@ -34,9 +32,6 @@ const Home = () => {
             }
             details={
               "Schedule your priorities rather than merely prioritizing what's on your calendar. Focus on one task at a time. For instance, if your project involves research, dedicate specific, focused time solely to gathering information before moving on"
-            }
-            img={
-              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7WqIZAUFiojyNqtQwRn17UXstPFv0C85WAw&usqp=CAU"
             }
             by={"Stephen Covey"}
             ></Quotes>

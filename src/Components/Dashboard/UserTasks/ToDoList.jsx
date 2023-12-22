@@ -3,7 +3,7 @@ import { Textarea } from "@nextui-org/react";
 import TitleDescription from "../../../Shared/TitleDescription";
 import Priority from "./Priority";
 
-import { BiSolidCheckCircle } from "react-icons/bi";
+import { BiSearch, BiSolidCheckCircle } from "react-icons/bi";
 import { BiCalendarCheck } from "react-icons/bi";
 import { BiCheck } from "react-icons/bi";
 import { AiFillDelete } from "react-icons/ai";
@@ -175,7 +175,7 @@ const ToDoList = () => {
           </div>
         </div>
       </div>
-      <div className=" bg-[white] flex-1 h-[1000px]">
+      <div className=" bg-[white] flex-1 min-h-[600px]">
         <ul className="p-5">
           {/* maping the newly added task */}
 
@@ -231,12 +231,15 @@ const ToDoList = () => {
             ))
           ) : (
             <div className="w-full h-full flex flex-col  justify-center">
-              <h1 className="text-4xl mb-8">Add your To-do here..</h1>
+              <h1 className="text-3xl text-center mb-5 flex justify-center">Add your To-Do here.. <BiSearch className="text-accentColor "/></h1>
+<div className="-ml-6">
 
               <SkeletonListLoader />
               <SkeletonListLoader />
               <SkeletonListLoader />
             </div>
+
+</div>
           )}
         </ul>
       </div>

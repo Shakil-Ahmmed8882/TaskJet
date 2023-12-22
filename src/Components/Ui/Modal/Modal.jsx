@@ -27,11 +27,12 @@ export default function TaskModal({refresh, isOpen, setIsOpen, taskId }) {
 
   if (isLoading) return 
   refetch()
+  
 
 
 
   const {title,description,deadlineDate,deadlineTime,priority
-  } = data
+  } = data?data:{}
   // console.log(Object.keys(data).join(""))
 
   const handlePrioritySelect = (priority) => {
