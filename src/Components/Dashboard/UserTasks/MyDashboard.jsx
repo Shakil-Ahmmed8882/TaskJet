@@ -15,7 +15,7 @@ const MyDashboard = () => {
   const {
     data: tasks,
     isLoading,
-    refetch,
+  refetch,
   } = useGetData(`tasks?email=${user && user.email}`, user?.email);
   const { handleDeleteTask } = useContext(TaskContext);
 
@@ -38,8 +38,8 @@ const MyDashboard = () => {
   
   return (
     <div>
-      <div className="  overflow-auto relative pt-11">
-        <div className="  flex gap-11 bg-[white] shadow-lg justify-center rounded-lg mb-8 w-full md:w-1/2 mx-auto p-8 ">
+      <div className="  overflow-auto relative pt-6">
+        <div className="  flex gap-11 bg-[white] shadow-lg justify-center rounded-lg mb-11 w-full md:w-1/2 mx-auto p-8 ">
           <Checkbox defaultSelected color="danger" size="lg">
             To-Do
           </Checkbox>
@@ -50,18 +50,18 @@ const MyDashboard = () => {
             Completed
           </Checkbox>
         </div>
-        <ul className="p-5 grid grid-cols-2 gap-6">
+        <ul className="p-5 grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* maping the newly added task */}
 
           {tasks?.length > 0 ? (
             tasks?.map((task, index) => (
               <li
                 key={index}
-                className={` relative  bg-[white] shadow-lg  rounded-lg p-5`}>
+                className={` relative  bg-[white] shadow-sm  rounded-lg p-5`}>
                 <div>
                   <div className="flex items-center gap-1">
                     <h2 className="text-[20px] mb-1 font-semibold">
-                      {task.title} First task title
+                      {task.title} 
                     </h2>
                     <span className="text-[20px] font-bold">
                       {task.priority === "High" ? (
@@ -80,12 +80,12 @@ const MyDashboard = () => {
                 </div>
                 <p className="text-[#767575] mt-2 ">{task.description} </p>
                 <div className="flex gap-1 pt-4">
-                  <Progress id={task?._id || "6584e312272e11d50358b817"} />
+                  <Progress state={task?.progress} id={task?._id} />
                 </div>
                 <div className="flex gap-2 absolute top-2 right-2 ">
                   <AiFillDelete
                     onClick={() => handleDeleteTask(task._id, refetch)}
-                    className=" cursor-pointer text-[#ff6c6c] text-[20px] "
+                    className=" cursor-pointer text-[#ff7878] text-[20px] "
                   />
                   <AiTwotoneEdit
                     onClick={() => handleModalOpen(task._id)}

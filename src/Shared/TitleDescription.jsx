@@ -3,7 +3,7 @@ import { BsBalloonFill } from "react-icons/bs";
 const TitleDescription = ({ title, description }) => {
   return (
     <div>
-      <div className="flex z-20 relative items-center  lg:justify-center gap-1 ">
+      <div className="flex z-20 relative items-center pl-4  lg:justify-center gap-1 ">
         <BsBalloonFill className="text-4xl text-primaryColor"/>
         <h1 className="text-3xl md:text-4xl  font-bold">{title}</h1>
       </div>
