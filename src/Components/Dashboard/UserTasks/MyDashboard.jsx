@@ -8,6 +8,7 @@ import { BiCalendarCheck, BiCheck, BiSolidCheckCircle } from "react-icons/bi";
 import { useContext, useState } from "react";
 import { TaskContext } from "../../../Providers/TaskProvider";
 import { Checkbox } from "@nextui-org/react";
+import Progress from "./Progress";
 
 const MyDashboard = () => {
   const { user } = UseAuth();
@@ -24,22 +25,21 @@ const MyDashboard = () => {
 
   const handleModalOpen = (_id) => {
     refetch();
-    setIsModalOpen(true); // Function to set the modal as open
+    // Function to set the modal as open
+    setIsModalOpen(true); 
     setTaskId(_id);
   };
+  if (isLoading) {
+    return <div>Loading...</div>; 
+  }
 
-  const [selectedValue, setSelectedValue] = useState("");
-  if (isLoading) return;
 
-  const handleCheckboxChange = (value) => {
-    // Update the state with the value of the checked checkbox
-    setSelectedValue(value);
-  };
-
+  
+  
   return (
     <div>
       <div className="  overflow-auto relative pt-11">
-        <div className="  flex gap-11 bg-[white] shadow-lg justify-center rounded-lg mb-8 w-1/2 mx-auto p-8 ">
+        <div className="  flex gap-11 bg-[white] shadow-lg justify-center rounded-lg mb-8 w-full md:w-1/2 mx-auto p-8 ">
           <Checkbox defaultSelected color="danger" size="lg">
             To-Do
           </Checkbox>
@@ -57,7 +57,7 @@ const MyDashboard = () => {
             tasks?.map((task, index) => (
               <li
                 key={index}
-                className={` relative  bg-[white] shadow-lg my-5 rounded-lg p-5`}>
+                className={` relative  bg-[white] shadow-lg  rounded-lg p-5`}>
                 <div>
                   <div className="flex items-center gap-1">
                     <h2 className="text-[20px] mb-1 font-semibold">
@@ -80,24 +80,7 @@ const MyDashboard = () => {
                 </div>
                 <p className="text-[#767575] mt-2 ">{task.description} </p>
                 <div className="flex gap-1 pt-4">
-                  <input
-                    type="checkbox"
-                    value="Option 1"
-                    checked={selectedValue === "Option 1"}
-                    onChange={() => handleCheckboxChange("Option 1")}
-                  />
-                  <input
-                    type="checkbox"
-                    value="Option 2"
-                    checked={selectedValue === "Option 2"}
-                    onChange={() => handleCheckboxChange("Option 2")}
-                  />
-                  <input
-                    type="checkbox"
-                    value="Option 3"
-                    checked={selectedValue === "Option 3"}
-                    onChange={() => handleCheckboxChange("Option 3")}
-                  />
+                  <Progress id={task?._id || "6584e312272e11d50358b817"} />
                 </div>
                 <div className="flex gap-2 absolute top-2 right-2 ">
                   <AiFillDelete

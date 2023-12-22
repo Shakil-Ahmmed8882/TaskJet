@@ -30,7 +30,7 @@ export default function TaskModal({refresh, isOpen, setIsOpen, taskId }) {
 
 
 
-  const {_id,title,description,deadlineDate,deadlineTime,deadline,email,priority
+  const {title,description,deadlineDate,deadlineTime,priority
   } = data
   // console.log(Object.keys(data).join(""))
 

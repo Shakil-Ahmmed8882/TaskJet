@@ -32,8 +32,12 @@
  * 
  * 
 //  ---------------- Dashboard ----------
- * TODO: Fetch all the tasks were added
- * TODO: Show them in the ui 
+ *  Fetch all the tasks were added
+ *  Show them in the ui 
+ *  TODO: let the user ensure task category (todo,ongoing,completed)
+ *  TODO: add the progress/state 
+ *  TODO: get the type and id of that task 
+ *  TODO: 
  * 
  * 
  * ##3 

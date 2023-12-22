@@ -15,7 +15,7 @@ import { errorToast } from "../../../utils/ErrorToast";
 import { UseAuth } from "../../../Hooks/UseAuth";
 import TaskModal from "../../Ui/Modal/Modal";
 import { useGetData } from "../../../Hooks/useGetData";
-import Swal from "sweetalert2";
+// import Swal from "sweetalert2";
 import { TaskContext } from "../../../Providers/TaskProvider";
 
 const ToDoList = () => {
@@ -55,6 +55,7 @@ const ToDoList = () => {
 
     // Store deadline in the task object
     task.deadline = deadline;
+    task.progress = "to-do";
     task.email = user ? user.email : null;
 
     task.priority = selectedPriority ? selectedPriority : "Moderate";
@@ -190,9 +191,9 @@ const ToDoList = () => {
                     : "border-l-[red]"
                 } bg-[white] shadow-lg my-5 rounded-lg p-2`}>
                 <div>
-                  <div className="flex items-center gap-1">
-                    <h2 className="text-[16px] mb-1 font-semibold">
-                      {task.title} First task title
+                  <div className="flex items-start gap-1">
+                    <h2 className="text-[16px] pb-2 font-semibold">
+                      {task.title}
                     </h2>
                     <span className="text-[20px] font-bold">
                       {task.priority === "High" ? (

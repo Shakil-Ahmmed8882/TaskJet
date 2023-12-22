@@ -11,7 +11,7 @@ export default {
   ],
   theme: {
     colors:{
-    primaryColor:"#F31E85",
+    primaryColor:"#F31260",
     accentColor:"#00BAF8",
     accentLightBg:"#E2F7FE",
     primaryLightBg:"#FDEAF0",
