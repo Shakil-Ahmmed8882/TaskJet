@@ -12,34 +12,80 @@ import { BsBell, BsGear } from "react-icons/bs";
 import { BsClockHistory } from "react-icons/bs";
 // import { BsFillPeopleFill } from "react-icons/bs";
 import { Avatar } from "@nextui-org/react";
+import { UseAuth } from "../../Hooks/UseAuth";
+import { BsFileEarmarkCheck } from "react-icons/bs";
+import { BsDropletHalf } from "react-icons/bs";
+import { BsBlockquoteRight } from "react-icons/bs";
+import { BsPen } from "react-icons/bs";
+import { BsAlignStart } from "react-icons/bs";
+import { AiOutlineDashboard } from "react-icons/ai";
 
 const DashboardRoutes = () => {
+  const { user } = UseAuth();
+
   return (
     <div className="md:p-4  bg-[#FFFFFF] pl-[10px] h-full z-30 fixed md:pl-[25px]">
       <div className="w-[180px] relative hidden md:block overflow-auto hide-scrollbar   h-screen">
-          <div className="fixed top-0 z-50 bg-[white] w-[180px] ">
+        <div className="fixed top-0 z-50 bg-[white] w-[180px] ">
           <Logo></Logo>
         </div>
         <div className="bg-[#F4F8FB] mt-16  ml-[25px] w-28 h-28 flex items-center justify-center  rounded-full">
-        <Avatar className="mx-auto z-20 my-8 bg-primaryColor w-[90px] h-[90px]" src="https://i.pravatar.cc/150?u=a042581f4e29026704d" />
+          <Avatar
+            className="mx-auto z-20 my-8 bg-primaryColor w-[90px] h-[90px]"
+            src={`${
+              user.photoURL
+                ? user.photoURL
+                : "https://i.pravatar.cc/150?u=a042581f4e29026704d"
+            }`}
+          />
         </div>
         <div>
-          <h1 className="text-[18px] ml-[25px] mb-[3px] font-bold">Gary Simon</h1>
-        <p className="text-[15px] text-[gray] pl-6">user@gmail.com</p>
-
+          <h1 className="text-[18px] ml-[25px] mb-[3px] font-bold">
+            {user ? user.displayName : "Garry"}
+          </h1>
+          <p className="text-[15px] text-[gray] pl-6">
+            {user ? user.email : "user@gmail.com"}
+          </p>
         </div>
 
         <ul className="flex flex-col gap-y-2 routes">
-          <Link to="/dashboard">
-            <li className="flex items-center gap-2 mt-3">
-              <BiHomeSmile />
-              Home
+        
+        <Link to="/dashboard" className="mt-3">
+            <li className="flex items-center gap-2">
+              <AiOutlineDashboard />
+              Dashboard
             </li>
           </Link>
+          
           <Link to="/dashboard/quick_start">
             <li className="flex items-center gap-2">
-              <BiHomeSmile />
+              <BsAlignStart />
               Quick start
+            </li>
+          </Link>
+        
+          <Link to="/dashboard/create_to_do">
+            <li className="flex items-center gap-2">
+              <BsPen />
+              Create To-do
+            </li>
+          </Link>
+          <Link to="/dashboard/to-do-list">
+            <li className="flex items-center gap-2">
+              <BsBlockquoteRight />
+              To-Do-List 
+            </li>
+          </Link>
+          <Link to="/dashboard/ongoing_tasks">
+            <li className="flex items-center gap-2">
+              <BsDropletHalf />
+              Ongoing tasks
+            </li>
+          </Link>
+          <Link to="/dashboard/completed_tasks">
+            <li className="flex items-center gap-2">
+              <BsFileEarmarkCheck />
+              Completed tasks
             </li>
           </Link>
           <Link to="/dashboard/tasks">

@@ -7,32 +7,22 @@ const Footer = () => {
         <div className="bg-gray-800 py-4 text-gray-400">
           <div className="  mx-auto">
             <div className="-mx-4 flex flex-wrap justify-between">
-              <div className="px-4 my-4 w-full xl:w-1/5">
-                <a href="/" className="block w-56 mb-10">
-                <Logo/>
-                </a>
-                <p className="text-justify">
-                  Tailwindow is a collection of UI Components created using
-                  Tailwind CSS Framework. The UI Components gives you all of the
-                  building blocks you need to build any designs without any
-                  annoying opinionated styles you have to fight to override.
-                </p>
-              </div>
+              
               <div className="px-4 my-4 w-full sm:w-auto">
                 <div>
                   <h2 className="inline-block text-2xl pb-4 mb-4 border-b-4 border-blue-600">
-                    Company
+                  Useful Links
                   </h2>
                 </div>
                 <ul className="leading-8">
                   <li>
                     <a href="#" className="hover:text-blue-400">
-                      About Us
+                    About Tasklet
                     </a>
                   </li>
                   <li>
                     <a href="#" className="hover:text-blue-400">
-                      Terms &amp; Conditions
+                    Terms & Conditions
                     </a>
                   </li>
                   <li>
@@ -42,7 +32,7 @@ const Footer = () => {
                   </li>
                   <li>
                     <a href="#" className="hover:text-blue-400">
-                      Contact Us
+                    Contact Support
                     </a>
                   </li>
                 </ul>
@@ -56,22 +46,22 @@ const Footer = () => {
                 <ul className="leading-8">
                   <li>
                     <a href="#" className="hover:text-blue-400">
-                      Getting Started With HTML and CSS
+                    How Tasklet Simplifies Task Management
                     </a>
                   </li>
                   <li>
                     <a href="#" className="hover:text-blue-400">
-                      What Is Flex And When to Use It?
+                    Enhance Productivity with Tasklet Features
                     </a>
                   </li>
                   <li>
                     <a href="#" className="hover:text-blue-400">
-                      How TailwindCSS Can Help Your Productivity?
+                    Tasklet Insights for Effective Planning
                     </a>
                   </li>
                   <li>
                     <a href="#" className="hover:text-blue-400">
-                      5 Tips to Make Responsive Website
+                    Explore More
                     </a>
                   </li>
                   <li>
@@ -144,12 +134,10 @@ const Footer = () => {
         <div className="bg-indigo-700 py-4 text-gray-100">
           <div className="container mx-auto px-4">
             <div className="-mx-4 flex flex-wrap justify-between">
-              <div className="px-4 w-full text-center sm:w-auto sm:text-left">
-                Copyright © 2020 - 2022 Tailwindow. All Rights Reserved.
+              <div className="px-4 flex justify-center w-full text-center ">
+                <span>Copyright © 2020 - 2023 Tasklet.</span>
               </div>
-              <div className="px-4 w-full text-center sm:w-auto sm:text-left">
-                Made with ❤️ by Tailwindow.
-              </div>
+              
             </div>
           </div>
         </div>
@@ -159,3 +147,5 @@ const Footer = () => {
 };
 
 export default Footer;
+
+

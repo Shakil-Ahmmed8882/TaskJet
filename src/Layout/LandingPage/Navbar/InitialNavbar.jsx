@@ -19,7 +19,7 @@ export default function TopNavbar() {
   const goTo = useNavigate();
 
   return (
-    <Navbar maxWidth="full" onMenuOpenChange={setIsMenuOpen} style={{ backgroundColor: "" }}>
+    <Navbar maxWidth="full"  onMenuOpenChange={setIsMenuOpen} style={{ backgroundColor: "transparent" }}>
       <Logo />
       <NavbarContent className="relative  flex md:hidden">
         <NavbarMenuToggle
@@ -64,10 +64,11 @@ export default function TopNavbar() {
       </NavbarContent>
 
       {/* This menu is the dropdown */}
-      <NavbarMenu className="bg-[#80808037] w-1/2 top-16">
+      <NavbarMenu className="bg-[#00baf8cd] w-1/2 top-16">
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item.label}-${index}`}>
             <NavLink
+              
               color={
                 index === 2
                   ? "primary"

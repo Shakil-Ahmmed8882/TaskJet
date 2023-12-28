@@ -2,13 +2,13 @@ import { BiCalendarCheck, BiCheck, BiSolidCheckCircle } from "react-icons/bi";
 import { UseAuth } from "../../../Hooks/UseAuth";
 import { useGetData } from "../../../Hooks/useGetData";
 import TitleDescription from "../../../Shared/TitleDescription";
-import Progress from "./Progress";
-import { AiFillDelete, AiTwotoneEdit } from "react-icons/ai";
+import { AiFillDelete, AiOutlineDashboard, AiTwotoneEdit } from "react-icons/ai";
 import TaskModal from "../../Ui/Modal/Modal";
 import SkeletonListLoader from "../../Ui/Skeleton/SkeletonListLoader";
 import { useContext, useState } from "react";
 import { TaskContext } from "../../../Providers/TaskProvider";
 import LoadingSpinner from "../../Ui/Spinner/Spinner";
+import { Link } from "react-router-dom";
 
 
 const OngoingTasks = () => {
@@ -32,14 +32,18 @@ const OngoingTasks = () => {
   };
   
   if(isLoading) return <LoadingSpinner/>
-  console.log(tasks)
   return (
     <div>
-      {
-        tasks?.length > 0 &&
-        <TitleDescription title={"Ongoing tasks"} />
+     <div className="flex justify-center items-center ">
+        {tasks?.length > 0 && <TitleDescription title={"Ongoing tasks"} />}
 
-      }
+        <Link
+          className="ml-auto flex items-center text-2xl gap-2"
+          to="/dashboard">
+          <AiOutlineDashboard className=" " />
+          <span className="text-[17px]">Back to dashboard</span>
+        </Link>
+      </div>
       <ul className={`p-5 grid grid-cols-1 ${tasks?.length && "lg:grid-cols-2"} items-center justify-center  gap-6`}>
           {/* maping the newly added task */}
 

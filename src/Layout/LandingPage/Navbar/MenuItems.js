@@ -1,8 +1,9 @@
 
 export const menuItems = [
-      {label:"Profile",path:"/profile"},
-      {label:"Dashboard",path:"/Dashboard"},
-      {label:"Activity",path:"/Activity"},
-      {label:"Log Outt",path:"/logout"}
+  {label:"Home",path:"/"},
+      {label:"Community",path:"/community"},
+      {label:"Contact",path:"/contact"},
+      {label:"Activity",path:"/activity"},
+      {label:"Sign in",path:"/login"}
       
     ];

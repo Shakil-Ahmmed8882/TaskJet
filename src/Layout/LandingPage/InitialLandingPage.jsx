@@ -7,6 +7,7 @@ const InitialLandingPage = () => {
     <div>
       <div className="max-w-7xl mx-auto">
         <InitialNavbar />
+
         <div className="md:pl-11 px-3 md:min-h-[500px] overflow-hidden w-full">
           <Outlet />
         </div>

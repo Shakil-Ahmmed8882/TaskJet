@@ -30,7 +30,10 @@ const Login = () => {
 
   const handleMedia = (media) => {
     media()
-      .then(() => successToast("signed in with google"))
+      .then(() => {
+        goTo("/dashboard")
+        successToast("signed in with google")
+      })
       .catch((err) => console.log(err));
   };
   return (
@@ -46,7 +49,7 @@ const Login = () => {
           <div className="text-center flex items-center justify-center py-8">
             <div
               onClick={() => handleMedia(googleSignIn)}
-              className="bg-[white] shadow-sm p-2 rounded-full">
+              className="bg-[white] shadow-sm cursor-pointer p-2 rounded-full">
               <BsGoogle className="text-2xl text-accentColor" />
             </div>
             <span className="text-[#9CA3AF] text-[18px]">

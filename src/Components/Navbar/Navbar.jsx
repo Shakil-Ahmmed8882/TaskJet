@@ -16,8 +16,6 @@ import { BsFilterRight } from "react-icons/bs";
 export default function TopNavbar() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
-  
-  
   return (
     <Navbar
       onMenuOpenChange={setIsMenuOpen}
@@ -44,10 +42,11 @@ export default function TopNavbar() {
       
 
       {/* This menu are the dropdown */}
-      <NavbarMenu className="bg-primaryColor w-1/2 top-0">
+      <NavbarMenu className="bg-primaryColor w-1/2 top-16">
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
             <Link
+            to={item.path}
               color={
                 index === 2
                   ? "primary"
@@ -56,9 +55,9 @@ export default function TopNavbar() {
                   : "foreground"
               }
               className="w-full"
-              href="#"
               size="lg">
-              {item}
+              {item.label}
+            
             </Link>
           </NavbarMenuItem>
         ))}

@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { successToast } from "../../utils/SuccessToast";
 
 const ProfileDropdown = () => {
-  const { logOut } = UseAuth();
+  const { logOut, user } = UseAuth();
   const goTo = useNavigate();
 
   const handleLogOut = () => {
@@ -28,34 +28,40 @@ const ProfileDropdown = () => {
             isBordered
             as="button"
             className="transition-transform"
-            src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+            src={`${
+              user.photoURL
+                ? user.photoURL
+                : "https://i.pravatar.cc/150?u=a042581f4e29026704d"
+            }`}
           />
         </DropdownTrigger>
         <DropdownMenu aria-label="Profile Actions" variant="flat">
           <DropdownItem key="profile" className="h-14 gap-2">
             <p className="font-semibold">Signed in as</p>
-            <p className="font-semibold">zoey@example.com</p>
+            <p className="font-semibold">
+              {user.email ? user.email : "user@gamil.com"}
+            </p>
           </DropdownItem>
           {/* To Do List
 Ongoing Tasks
 Completed Tasks */}
           <DropdownItem
-            key="help_and_feedback"
-            onClick={() => goTo("/dashboard/my_dashboard")}>
-            My Dashboard
+            key="create_task"
+            onClick={() => goTo("/dashboard/create_to_do")}>
+            Create task
           </DropdownItem>
           <DropdownItem
-            key="help_and_feedback"
-            onClick={() => goTo("/dashboard/to_do_list")}>
-            To Do List
+            key="to_do"
+            onClick={() => goTo("/dashboard/to-do-list")}>
+            To-Do list
           </DropdownItem>
           <DropdownItem
-            key="help_and_feedback"
+            key="ongoing_task"
             onClick={() => goTo("/dashboard/ongoing_tasks")}>
             Ongoing Tasks
           </DropdownItem>
           <DropdownItem
-            key="help_and_feedback"
+            key="completed_task"
             onClick={() => goTo("/dashboard/completed_tasks")}>
             completed Tasks
           </DropdownItem>

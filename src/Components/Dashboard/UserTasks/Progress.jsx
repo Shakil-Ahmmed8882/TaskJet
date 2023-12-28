@@ -3,7 +3,7 @@ import { RadioGroup, Radio } from "@nextui-org/react";
 import usePublicApi from "../../../Hooks/usePublicApi";
 import Swal from "sweetalert2";
 
-const Progress = ({ id, state }) => {
+const Progress = ({ id, state, dragOverelement}) => {
   const [selected, setSelected] = useState(state);
   const xiosPublic = usePublicApi();
 
@@ -34,7 +34,7 @@ const Progress = ({ id, state }) => {
     if (selected !== state) {
       fetchData();
     }
-  }, [id, selected, state, xiosPublic]);
+  }, [id, selected, state, xiosPublic,dragOverelement]);
 
   const handleStateChange = (newState) => {
     // Allow users to manually change the state

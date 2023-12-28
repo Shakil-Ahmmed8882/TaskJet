@@ -1,14 +1,11 @@
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import DashboardRoutes from "../Components/Dashboard/DashboardRoutes";
 import TopSearchBar from "../Components/Dashboard/TopSearchBar";
 import ProfileAndNotification from "../Components/Navbar/ProfileAndNotification";
 
-
 function App() {
-  const location = useLocation()
-  const isHomeRoute = location.pathname == '/dashboard'
   return (
-    <div className={`flex ${isHomeRoute?"md:w-[84%]":"w-full"}`}>
+    <div className={`flex w-full`}>
       <div className="">
         <DashboardRoutes></DashboardRoutes>
       </div>
@@ -19,18 +16,11 @@ function App() {
           </div>
           <ProfileAndNotification />
         </div>
-        <div>
-          
-        </div>
-        <div className="flex items-center md:pl-6">
-
-          
-        
-        </div>
+        <div></div>
+        <div className="flex items-center md:pl-6"></div>
         <div className="md:px-6 mt-8 bg-[#f8fbfc]">
           <Outlet />
         </div>
-
       </div>
     </div>
   );

@@ -1,13 +1,7 @@
-
 export const menuItems = [
-      "Profile",
-      "Dashboard",
-      "Activity",
-      "Analytics",
-      "System",
-      "Deployments",
-      "My Settings",
-      "Team Settings",
-      "Help & Feedback",
-      "Log Out",
-    ];
+  { label: "Home", path: "/" },
+  { label: "Community", path: "/community" },
+  { label: "Contact", path: "/contact" },
+  { label: "Activity", path: "/activity" },
+  { label: "Signup", path: "/signup" },
+];

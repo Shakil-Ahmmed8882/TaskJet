@@ -1,10 +1,15 @@
 import { Link } from "react-router-dom";
 import { UseAuth } from "../Hooks/UseAuth";
+import Home from "./Home";
 
 const Banner = () => {
   const {user} = UseAuth()
   return (
     <div>
+      <div className="my-32">
+      <Home/>
+
+      </div>
       <>
         {/* https://gist.github.com/goodreds/3d044027175954984fb96c7407a955ab */}
         {/* Container */}
@@ -34,7 +39,7 @@ const Banner = () => {
                 <Link
 
                   to={`${user?"/dashboard":"/login"}`}
-                    className="inline-block  text-center w-full sm:w-1/2 bg-accentColor  border-none md:text-lg font-medium text-gray-100 bg-green-600 text-[white] border-2 border-gray-600 md:py-4 py-2 md:px-10  hover:bg-green-800 hover:shadow-md md:w-48">
+                    className="inline-block  text-center w-full sm:w-1/2 bg-primaryColor rounded-lg  border-none md:text-lg font-medium text-gray-100 bg-green-600 text-[white] border-2 border-gray-600 md:py-4 py-2 md:px-10  hover:bg-green-800 hover:shadow-md md:w-48">
                   Let&apos;s Explore
                 </Link>
               </div>

@@ -10,7 +10,7 @@ const TaskProvider = ({children}) => {
   const handleDeleteTask = async (_id,refetch) => {
       Swal.fire({
         title: "Are you sure?",
-        text: "You won't be able to revert this!",
+        text: "You won't be able to revert this task anymore!",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
@@ -24,7 +24,7 @@ const TaskProvider = ({children}) => {
             refetch();
             Swal.fire({
               title: "Deleted!",
-              text: "Your file has been deleted.",
+              text: "This task has been deleted.",
               icon: "success",
             });
           }
@@ -35,7 +35,7 @@ const TaskProvider = ({children}) => {
 
     const taskInfo = {
       handleDeleteTask,
-      
+
     }
       return (
             <TaskContext.Provider value={taskInfo}>

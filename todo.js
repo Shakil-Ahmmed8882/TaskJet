@@ -34,16 +34,16 @@
 //  ---------------- Dashboard ----------
  *  Fetch all the tasks were added
  *  Show them in the ui 
- *  TODO: let the user ensure task category (todo,ongoing,completed)
- *  TODO: add the progress/state 
- *  TODO: get the type and id of that task 
- *  TODO: 
+ *  let the user ensure task category (todo,ongoing,completed)
+ *  add the progress/state 
+ *  get the type and id of that task 
+ *  
  * 
  * 
  * ##3 
  * TODO: Notification for deadline
  * ---------------- home -------------
-      * TODO: Quote slide must be relevant quote text
+    Quote slide must be relevant quote text
  * 
  * 
  */

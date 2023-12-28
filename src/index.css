@@ -49,5 +49,8 @@ body {
 }
 
 a.active {
-  background-color: red !important;
+  background-color: #F31260  !important;
+  padding: 5px 10px ;
+  color: #fff;
+  border-radius: 5px;
 }

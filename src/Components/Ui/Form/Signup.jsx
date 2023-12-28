@@ -13,6 +13,8 @@ import { CgLink } from "react-icons/cg";
 import { Link, useNavigate } from "react-router-dom";
 import { UseAuth } from "../../../Hooks/UseAuth";
 import { successToast } from "../../../utils/SuccessToast";
+import { validate } from "../../../utils/validate";
+import { errorToast } from "../../../utils/ErrorToast";
 
 const SignUp = () => {
   const [passwordType, setPasswordType] = useState("password");
@@ -22,20 +24,32 @@ const SignUp = () => {
   const [photoURL, setPhotoURL] = useState("");
   const [password, setPassword] = useState("");
 
+
+
   const goTo = useNavigate();
   const handleSignUp = (e) => {
     e.preventDefault();
 
+    validate(name,email,photoURL,password)
+    const isValid = validate(name,email,photoURL,password)
+
+    if(isValid) return 
+
+    console.log('it is the photourl', photoURL)
     updateUserProfile(name, photoURL)
-      .then()
-      .catch((err) => console.log(err));
-    createUser(email, password)
       .then(() => {
+        console.log('photo of the user is set');
+      })
+      .catch((err) => console.log(err));
+    
+
+    createUser(email, password)
+    .then(() => {
         successToast("created user");
 
         goTo("/dashboard");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => errorToast(err.message));
   };
 
   return (

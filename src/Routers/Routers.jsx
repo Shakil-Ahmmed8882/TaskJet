@@ -21,9 +21,12 @@ import Banner from "../pages/Banner";
 import Login from "../Components/Ui/Form/Login";
 import SignUp from "../Components/Ui/Form/Signup";
 import MyDashboard from "../Components/Dashboard/UserTasks/MyDashboard";
-import ToDoList from "../Components/Dashboard/UserTasks/ToDoList";
 import OngoingTasks from "../Components/Dashboard/UserTasks/OngoingTasks";
 import CompletedTasks from "../Components/Dashboard/UserTasks/CompletedTasks";
+import Guard from "../Components/Private/Guard";
+import Page404 from "../Components/Ui/PageNotFount/Page404";
+import CreateToDo from "../Components/Dashboard/UserTasks/CreateToDo";
+import ToDoList from "../Components/Dashboard/UserTasks/ToDoList";
 
 export const router = createBrowserRouter([
   {
@@ -33,11 +36,32 @@ export const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <App />,
+    element: (
+      <Guard>
+        <App />
+      </Guard>
+    ),
     children: [
       {
         index: true,
-        element: <Home />,
+        element: <MyDashboard />,
+      },
+      // Users routes
+      {
+        path: "create_to_do",
+        element: <CreateToDo />,
+      },
+      {
+        path: "to-do-list",
+        element: <ToDoList />,
+      },
+      {
+        path: "ongoing_tasks",
+        element: <OngoingTasks />,
+      },
+      {
+        path: "completed_tasks",
+        element: <CompletedTasks />,
       },
       {
         path: "quick_start",
@@ -95,24 +119,6 @@ export const router = createBrowserRouter([
         path: "setting",
         element: <Setting />,
       },
-      // Users routes
-      {
-        path: "my_dashboard",
-        element: <MyDashboard />,
-      },
-      {
-        path: "to_do_list",
-        element: <ToDoList />,
-      },
-      {
-        path: "ongoing_tasks",
-        element: <OngoingTasks/>,
-      },
-      {
-        path: "completed_tasks",
-        element: <CompletedTasks/>,
-      },
-
     ],
   },
   {
@@ -122,5 +128,9 @@ export const router = createBrowserRouter([
   {
     path: "/signup",
     element: <SignUp />,
+  },
+  {
+    path: "*",
+    element: <Page404 />,
   },
 ]);
