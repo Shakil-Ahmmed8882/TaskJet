@@ -11,7 +11,7 @@ import LoadingSpinner from "../../Ui/Spinner/Spinner";
 import { AiOutlineDashboard } from "react-icons/ai";
 import { Link } from "react-router-dom";
 
-const ToDoList = () => {
+const ToDoList = ({ dragstarted }) => {
   const { user } = UseAuth();
 
   const {
@@ -34,7 +34,7 @@ const ToDoList = () => {
   };
 
   if (isLoading) return <LoadingSpinner />;
-  console.log(tasks);
+ 
   return (
     <div>
       <div className="flex justify-center items-center ">
@@ -56,6 +56,8 @@ const ToDoList = () => {
         {tasks?.length > 0 ? (
           tasks?.map((task, index) => (
             <li
+              draggable
+              onDragStart={(e) => dragstarted(e, task?._id)}
               key={index}
               className={` relative  bg-[white] shadow-lg  rounded-lg p-5`}>
               <div>

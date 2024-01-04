@@ -1,6 +1,19 @@
 
 
 const Tabs = ({handleTabClick,openTab}) => {
+      
+  // tabs state
+  const [openTab, setOpenTab] = useState(0);
+  const [activeTab, setActiveTab] = useState("to-do");
+  
+      const handleTabClick = (tabNumber) => {
+            const activeTab =
+              tabNumber == 1 ? "to-do" : tabNumber == 2 ? "ongoing" : "completed";
+        
+            setOpenTab(tabNumber);
+            setActiveTab(activeTab);
+          };
+        
 
 
 //   const activeClasses = 'border-l border-t border-r rounded-t text-blue-700';

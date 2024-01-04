@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import Logo from "../Navbar/Logo";
-import { BiHomeSmile } from "react-icons/bi";
 import { BiTask } from "react-icons/bi";
 import { BiNote } from "react-icons/bi";
 import { BiArchive } from "react-icons/bi";
@@ -18,14 +17,24 @@ import { BsDropletHalf } from "react-icons/bs";
 import { BsBlockquoteRight } from "react-icons/bs";
 import { BsPen } from "react-icons/bs";
 import { BsAlignStart } from "react-icons/bs";
-import { AiOutlineDashboard } from "react-icons/ai";
+import { AiFillDelete, AiOutlineDashboard } from "react-icons/ai";
+import { TaskContext } from "../../Providers/TaskProvider";
+import { useContext } from "react";
 
 const DashboardRoutes = () => {
   const { user } = UseAuth();
+  const {
+    handleDeleteTask,
+    // dragstarted,
+    dragOverelement,
+    dragDrop,
+    draggingOver,
+    draggingTaskId,
+  } = useContext(TaskContext);
 
   return (
     <div className="md:p-4  bg-[#FFFFFF] pl-[10px] h-full z-30 fixed md:pl-[25px]">
-      <div className="w-[180px] relative hidden md:block overflow-auto hide-scrollbar   h-screen">
+      <div className="w-[180px] overflow-x-hidden relative hidden md:block overflow-auto hide-scrollbar   h-screen">
         <div className="fixed top-0 z-50 bg-[white] w-[180px] ">
           <Logo></Logo>
         </div>
@@ -49,21 +58,20 @@ const DashboardRoutes = () => {
         </div>
 
         <ul className="flex flex-col gap-y-2 routes">
-        
-        <Link to="/dashboard" className="mt-3">
+          <Link to="/dashboard" className="mt-3">
             <li className="flex items-center gap-2">
               <AiOutlineDashboard />
               Dashboard
             </li>
           </Link>
-          
+
           <Link to="/dashboard/quick_start">
             <li className="flex items-center gap-2">
               <BsAlignStart />
               Quick start
             </li>
           </Link>
-        
+
           <Link to="/dashboard/create_to_do">
             <li className="flex items-center gap-2">
               <BsPen />
@@ -73,7 +81,7 @@ const DashboardRoutes = () => {
           <Link to="/dashboard/to-do-list">
             <li className="flex items-center gap-2">
               <BsBlockquoteRight />
-              To-Do-List 
+              To-Do-List
             </li>
           </Link>
           <Link to="/dashboard/ongoing_tasks">
@@ -86,6 +94,35 @@ const DashboardRoutes = () => {
             <li className="flex items-center gap-2">
               <BsFileEarmarkCheck />
               Completed tasks
+            </li>
+          </Link>
+          <hr />
+          <Link to="/dashboard/notifications">
+            <li
+              droppable
+              onDragOver={(e) => draggingOver(e)}
+              className={`p-2 flex items-center z-50 gap-2 relative rounded-b-lg mx-3 md:mx-0 ${
+                dragOverelement == "trash"
+                  ? "bg-[#f31261b7]"
+                  : "bg-[#f312612d] "
+              }`}
+              id="trash">
+              {/* This is style to effect when dragging to the trach can  */}
+              {/* {dragOverelement == "to-do" && (
+                <div>
+                  <div
+                    className={` flex items-center z-30 gap-2 -top-36 duration-100 left-0 w-44 h-80 rounded-r-full absolute   mx-3 md:mx-0 bg-[#f3126142]
+                }`}></div>
+                </div>
+              )} */}
+              {dragOverelement === "trash" && (
+                <>
+                  {async () => {
+                    await handleDeleteTask(draggingTaskId, "");
+                  }}
+                </>
+              )}
+              <AiFillDelete /> Trash
             </li>
           </Link>
           <Link to="/dashboard/tasks">
@@ -159,6 +196,7 @@ const DashboardRoutes = () => {
               Deadline tracker
             </li>
           </Link>
+
           <Link to="/dashboard/progress_tracker">
             <li className="flex items-center gap-2">
               <img
