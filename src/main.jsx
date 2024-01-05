@@ -13,18 +13,18 @@ const client = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <TaskProvider>
-      <QueryClientProvider client={client}>
-        {/* Next ui */}
-        <NextUIProvider>
-          {/* auth */}
-          <AuthProvider>
+    <QueryClientProvider client={client}>
+      <AuthProvider>
+        <TaskProvider>
+          {/* Next ui */}
+          <NextUIProvider>
+            {/* auth */}
             <RouterProvider router={router} />
             <Toaster />
-          </AuthProvider>
-        </NextUIProvider>
-      </QueryClientProvider>
-    </TaskProvider>
+          </NextUIProvider>
+        </TaskProvider>
+      </AuthProvider>
+    </QueryClientProvider>
 
     {/* Next ui Provider */}
   </React.StrictMode>

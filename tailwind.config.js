@@ -16,7 +16,8 @@ export default {
     accentLightBg:"#E2F7FE",
     primaryLightBg:"#FDEAF0",
     blueAccent:"#0760FB",
-    greenAccent:"#0BA229"
+    greenAccent:"#0BA229",
+    grayBg : "#E5E5E5"
     },
     extend: {},
   },

@@ -1,4 +1,7 @@
 /**
+ * Get more idea // https://youtu.be/WlXfYCd0Wls?si=LJtKZXKfM2ylItUw 
+ * 
+ * 
  *  Complete the login system with password and email
  * TODO: complete the google sign in ( store the user in the database with email and name)
  *  Create the signup page 
@@ -46,4 +49,10 @@
     Quote slide must be relevant quote text
  * 
  * 
+ * 
+ * 
+ * -----------------------------------
+ *             Dashboard
+ * -----------------------------------
+ * TODO: when task drag add skelaton loader until task load 
  */

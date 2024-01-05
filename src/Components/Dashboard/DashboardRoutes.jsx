@@ -19,18 +19,31 @@ import { BsPen } from "react-icons/bs";
 import { BsAlignStart } from "react-icons/bs";
 import { AiFillDelete, AiOutlineDashboard } from "react-icons/ai";
 import { TaskContext } from "../../Providers/TaskProvider";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 const DashboardRoutes = () => {
   const { user } = UseAuth();
-  const {
-    handleDeleteTask,
+  let {
+
     // dragstarted,
     dragOverelement,
+    setDragOverelement,
     dragDrop,
+    refetch,
     draggingOver,
-    draggingTaskId,
   } = useContext(TaskContext);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      // Update the dragOverelement state after two seconds
+      setDragOverelement(null); 
+    }, 2000);
+
+     // Clean up the timer on unmount or re-render
+    return () => clearTimeout(timer);
+  }, [dragOverelement,setDragOverelement]);
+
+  
 
   return (
     <div className="md:p-4  bg-[#FFFFFF] pl-[10px] h-full z-30 fixed md:pl-[25px]">
@@ -97,15 +110,12 @@ const DashboardRoutes = () => {
             </li>
           </Link>
           <hr />
-          <Link to="/dashboard/notifications">
+          <Link to="/dashboard">
             <li
               droppable
               onDragOver={(e) => draggingOver(e)}
-              className={`p-2 flex items-center z-50 gap-2 relative rounded-b-lg mx-3 md:mx-0 ${
-                dragOverelement == "trash"
-                  ? "bg-[#f31261b7]"
-                  : "bg-[#f312612d] "
-              }`}
+              onDrop={(e)=>dragDrop(e,refetch)}
+              className={`p-2 flex items-center z-50 gap-2 relative rounded-b-lg mx-3 md:mx-0`}
               id="trash">
               {/* This is style to effect when dragging to the trach can  */}
               {/* {dragOverelement == "to-do" && (
@@ -115,14 +125,7 @@ const DashboardRoutes = () => {
                 }`}></div>
                 </div>
               )} */}
-              {dragOverelement === "trash" && (
-                <>
-                  {async () => {
-                    await handleDeleteTask(draggingTaskId, "");
-                  }}
-                </>
-              )}
-              <AiFillDelete /> Trash
+              <AiFillDelete className={`${dragOverelement == "trash"?'text-[red]':""}`}/> Trash
             </li>
           </Link>
           <Link to="/dashboard/tasks">

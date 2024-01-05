@@ -1,5 +1,4 @@
 import { AiFillDelete, AiTwotoneEdit } from "react-icons/ai";
-import { UseAuth } from "../../../Hooks/UseAuth";
 import TaskModal from "../../Ui/Modal/Modal";
 // import SkeletonListLoader from "../../Ui/Skeleton/SkeletonListLoader";
 import { BiCalendarCheck, BiCheck, BiSolidCheckCircle } from "react-icons/bi";
@@ -8,30 +7,22 @@ import { TaskContext } from "../../../Providers/TaskProvider";
 import { Checkbox } from "@nextui-org/react";
 import LoadingSpinner from "../../Ui/Spinner/Spinner";
 
-import { useGetAllCategoricalData } from "../../../Hooks/useGetAllCategoricalData";
-
 const MyDashboard = () => {
-  const { user } = UseAuth();
   const {
     handleDeleteTask,
     dragstarted,
     dragOverelement,
     dragDrop,
     draggingOver,
-  } = useContext(TaskContext);
-
-  const {
     refetch,
     isLoading,
-    data: tasks,
+    tasks,
     todo,
     ongoing,
-    completed,
-  } = useGetAllCategoricalData(
-    `/tasks?email=${user && user.email}`,
-    user?.email
-  );
+    completed
+  } = useContext(TaskContext);
 
+ 
   useEffect(() => {
     refetch();
   }, [refetch, dragOverelement]);
@@ -74,7 +65,7 @@ const MyDashboard = () => {
           <div
             droppable
             onDragOver={(e) => draggingOver(e)}
-            onDrop={(e) => dragDrop(e)}
+            onDrop={(e,refetch) => dragDrop(e,refetch)}
             className={`p-2  rounded-b-lg mx-3 md:mx-0 ${
               dragOverelement == "to-do" ? "bg-[#f31261b7]" : "bg-[#f312612d] "
             }`}
@@ -128,7 +119,7 @@ const MyDashboard = () => {
                         className="cursor-pointer text-[#ff7878] text-[20px]"
                       />
                       <AiTwotoneEdit
-                        onClick={() => handleModalOpen(task._id)}
+                        onClick={() => handleModalOpen(task._id,refetch)}
                         className="cursor-pointer text-[20px]"
                       />
 
