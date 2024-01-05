@@ -6,6 +6,7 @@ import { useContext, useEffect, useState } from "react";
 import { TaskContext } from "../../../Providers/TaskProvider";
 import { Checkbox } from "@nextui-org/react";
 import LoadingSpinner from "../../Ui/Spinner/Spinner";
+import AllTaks from "./AllTaks";
 
 const MyDashboard = () => {
   const {
@@ -19,16 +20,18 @@ const MyDashboard = () => {
     tasks,
     todo,
     ongoing,
-    completed
+    completed,
   } = useContext(TaskContext);
 
- 
+  // state management
+  const [showAllTasks, setShowAllTaks] = useState(false);
+
   useEffect(() => {
     refetch();
   }, [refetch, dragOverelement]);
 
   // Editing modal handling here..
-  // if this modal needed to be used in multiple components then take this 
+  // if this modal needed to be used in multiple components then take this
   // funciton to the task provider file in global context
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [taskId, setTaskId] = useState("");
@@ -42,6 +45,11 @@ const MyDashboard = () => {
   if (isLoading) {
     return <LoadingSpinner />;
   }
+
+  const handleAllTasks = () => {
+    setShowAllTaks(!showAllTasks);
+    console.log(showAllTasks);
+  };
 
   return (
     <div>
@@ -59,13 +67,20 @@ const MyDashboard = () => {
             </Checkbox>
           </div>
         )}
-
+        <div
+          onClick={() => handleAllTasks()}
+          className={`bg-grayBg my-2 hover:bg-blueAccent hover:text-[white] cursor-pointer  inline-block px-8 py-2 `}>
+          All tasks
+        </div>
+        <div className={`transition-opacity duration-1000 ${showAllTasks ? 'opacity-100' : 'opacity-0'}`}>{showAllTasks ?
+          <AllTaks/>
+        :""}</div>
         <div className=" grid md:grid-cols-3 gap-3 w-full h-screen">
           {/* <div className="bg-[#f312619c] p-2  rounded-b-lg mx-3 md:mx-0"> */}
           <div
             droppable
             onDragOver={(e) => draggingOver(e)}
-            onDrop={(e,refetch) => dragDrop(e,refetch)}
+            onDrop={(e, refetch) => dragDrop(e, refetch)}
             className={`p-2  rounded-b-lg mx-3 md:mx-0 ${
               dragOverelement == "to-do" ? "bg-[#f31261b7]" : "bg-[#f312612d] "
             }`}
@@ -119,7 +134,7 @@ const MyDashboard = () => {
                         className="cursor-pointer text-[#ff7878] text-[20px]"
                       />
                       <AiTwotoneEdit
-                        onClick={() => handleModalOpen(task._id,refetch)}
+                        onClick={() => handleModalOpen(task._id, refetch)}
                         className="cursor-pointer text-[20px]"
                       />
 
