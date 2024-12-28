@@ -47,8 +47,8 @@ const DashboardRoutes = () => {
 
   return (
     <div className="md:p-4  bg-[#FFFFFF] pl-[10px] h-full z-30 fixed md:pl-[25px]">
-      <div className="w-[180px] overflow-x-hidden relative hidden md:block overflow-auto hide-scrollbar   h-screen">
-        <div className="fixed top-0 z-50 bg-[white] w-[180px] ">
+      <div className="w-[230px] overflow-x-hidden relative hidden md:block overflow-auto hide-scrollbar   h-screen">
+        <div className="fixed top-0 z-50 bg-[white] w-[230px] ">
           <Logo></Logo>
         </div>
         <div className="bg-[#F4F8FB] mt-16  ml-[25px] w-28 h-28 flex items-center justify-center  rounded-full">

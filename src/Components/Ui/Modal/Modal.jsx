@@ -84,7 +84,7 @@ export default function TaskModal({refresh, isOpen, setIsOpen, taskId }) {
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1">
-                Modal Title
+                Edit Todo
               </ModalHeader>
               <ModalBody>
                 <form className="space-y-6 mt-4" onSubmit={handleEditTask}>

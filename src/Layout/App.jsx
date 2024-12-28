@@ -9,7 +9,7 @@ function App() {
       <div className="">
         <DashboardRoutes></DashboardRoutes>
       </div>
-      <div className="w-full md:ml-[220px]">
+      <div className="w-full md:ml-[260px]">
         <div className=" items-center md:flex md:px-2 md:justify-between ">
           <div className="md:w-1/2">
             <TopSearchBar />
